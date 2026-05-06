@@ -1,37 +1,96 @@
 # Mikko Tarkiainen
 
-**I build production-grade AI and automation systems — with accessibility as a first-class requirement.**
+I build production-grade AI and automation systems where accessibility is a core engineering constraint, not an afterthought.
 
-Based in Finland. Running [wpsaavutettavuus.fi](https://wpsaavutettavuus.fi).
+Based in Finland. Running wpsaavutettavuus.fi.
 
----
+⸻
 
-## What I do
+Focus
 
-I combine large language models with deterministic logic, backend systems, and real-world API integrations. The focus is on systems that go beyond prototyping — reliability, failure handling, and production usability.
+I design and implement systems that combine:
 
-In parallel, I fix accessibility at the system level: semantic structure, component behavior, interaction patterns. Not overlays. Not quick fixes. Code.
+* Large language models (Claude, OpenAI)
+* Deterministic backend logic and workflows
+* Real-world API integrations and event-driven architectures
 
----
+The goal is not prototyping — but reliable systems that survive production use:
+error handling, edge cases, and operational usability included.
 
-## Recent work
+In parallel, I work on system-level accessibility engineering:
+semantic HTML, interaction models, and component behavior aligned with WCAG 2.2 AA — tested with real assistive technologies.
 
-**[A11Y Lead Engine](https://github.com/mikko-lab/a11y-lead-engine)** — AI-driven accessibility auditing and outreach pipeline. Scans WordPress sites for WCAG 2.2 AA violations, generates Claude-powered summaries in Finnish, enriches leads with YTJ/Kauppalehti business data, and handles personalized email delivery. Integrates Finlex + Rechtspraak legal case data for sales context. TypeScript · BullMQ · Playwright · axe-core · Prisma
+No overlays. No superficial fixes. Code-level implementation.
 
-**[WPSA Booking](https://github.com/mikko-lab/wpsa-booking)** — Event-driven booking automation with zero-touch calendar sync. Creates Google Meet or Teams links automatically, sends calendar invites, prevents double-bookings with timeslot locking and auto-expiry. WCAG 2.2 AA compliant. React · TypeScript · PHP · OAuth 2.0 · WordPress REST API
+⸻
 
-**[Luukku AI](https://github.com/mikko-lab/luukku-ai)** — LLM-powered document intelligence for real estate financial risk analysis. Two-pass Claude extraction from Finnish housing company documents, deterministic risk scoring 0–10, verdict output. Next.js · TypeScript · Prisma · Claude Haiku
+Selected Production Systems
 
-**[AAFT](https://github.com/mikko-lab/aaft)** — Accessible React component library for admin interfaces. Forms, data tables, modals, and a DOM audit tool — WCAG 2.2 AA compliant, screen reader tested, keyboard navigable. React · TypeScript · Tailwind CSS
+A11Y Lead Engine — Accessibility + AI Automation Pipeline
 
-**[GEO Agent](https://github.com/mikko-lab/geo-agent)** — Generative Engine Optimization system for WordPress content and AI search visibility (ChatGPT, Perplexity, Google AI Overviews). Human-in-the-loop approval before publishing. Python · Streamlit · Claude API · WordPress REST API
+AI-driven system that audits WordPress sites for WCAG 2.2 AA issues, generates structured Finnish summaries, enriches leads with business data, and automates outreach workflows.
 
----
+Integrates legal and business context (Finlex, company registries) for prioritization and messaging.
 
-## Tech
+Stack: TypeScript · BullMQ · Playwright · axe-core · Prisma
 
-TypeScript · Python · Node.js · React · PHP · LLM systems (Claude · OpenAI) · Redis · Playwright · axe-core · OAuth 2.0 · Prisma · WordPress · WCAG 2.2 AA
+⸻
 
----
+WPSA Booking — Accessible Scheduling System
 
-*Most websites fail accessibility. Most automation fails in production. I fix both.*
+Event-driven booking engine with zero-touch calendar synchronization and automatic meeting link generation (Google Meet / Microsoft Teams).
+
+Includes:
+
+* timeslot locking & collision prevention
+* auto-expiring reservations
+* WCAG 2.2 AA compliant UI flows
+
+Stack: React · TypeScript · PHP · OAuth 2.0 · WordPress REST API
+
+⸻
+
+Luukku AI — Real Estate Document Intelligence
+
+LLM-based system for parsing Finnish housing company documents and producing structured financial risk analysis (0–10 scoring model + verdict output).
+
+Stack: Next.js · TypeScript · Prisma · Claude (Haiku)
+
+⸻
+
+AAFT — Accessible Admin Component System
+
+React component library for admin interfaces with built-in accessibility constraints:
+forms, tables, modals, and DOM-level audit tooling.
+
+Tested with screen readers and keyboard-only navigation.
+
+Stack: React · TypeScript · Tailwind CSS
+
+⸻
+
+GEO Agent — AI Search Optimization System
+
+Generative Engine Optimization pipeline for WordPress content targeting AI search systems (ChatGPT, Perplexity, Google AI Overviews).
+
+Includes human-in-the-loop approval before publishing.
+
+Stack: Python · Streamlit · Claude API · WordPress REST API
+
+⸻
+
+Tech Stack
+
+TypeScript · Python · Node.js · React · PHP
+LLM systems (Claude · OpenAI)
+Redis · Prisma · Playwright · axe-core
+OAuth 2.0 · WordPress · WCAG 2.2 AA
+
+⸻
+
+Principle
+
+Most software fails at scale because it ignores production reality.
+Most accessibility work fails because it ignores system design.
+
+I work in the intersection where both matter.
