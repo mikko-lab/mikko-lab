@@ -1,6 +1,6 @@
 # Mikko Tarkiainen
 
-I build production-grade AI and automation systems where accessibility is a core engineering constraint, not an afterthought.
+Finnish engineer specializing in AI-driven accessibility systems, LLM orchestration, and production-grade automation pipelines.
 
 Based in Finland · [wpsaavutettavuus.fi](https://wpsaavutettavuus.fi)
 
@@ -22,11 +22,13 @@ No overlays. No superficial fixes. Code-level implementation.
 
 ## Selected Production Systems
 
+The projects below are part of a broader effort to build AI-assisted accessibility infrastructure and operational automation systems for real-world production environments.
+
 ### [A11Y Lead Engine — Accessibility + AI Automation Pipeline](https://github.com/mikko-lab/a11y-lead-engine)
 
 AI-driven system that audits WordPress sites for WCAG 2.2 AA issues, generates structured Finnish summaries, enriches leads with business data, and automates outreach workflows. Integrates legal and business context (Finlex, company registries) for prioritization and messaging.
 
-`TypeScript` `BullMQ` `Playwright` `axe-core` `Prisma` · **Production**
+`TypeScript` `BullMQ` `Playwright` `axe-core` `Prisma` · Used in real-world accessibility auditing workflows
 
 ---
 
@@ -38,7 +40,7 @@ Event-driven booking engine with zero-touch calendar synchronization and automat
 - Auto-expiring reservations
 - WCAG 2.2 AA compliant UI flows
 
-`React` `TypeScript` `PHP` `OAuth 2.0` `WordPress REST API` · **Production**
+`React` `TypeScript` `PHP` `OAuth 2.0` `WordPress REST API` · Built for live WordPress production environments
 
 ---
 
@@ -46,7 +48,7 @@ Event-driven booking engine with zero-touch calendar synchronization and automat
 
 LLM-based system for parsing Finnish housing company documents and producing structured financial risk analysis — 0–10 scoring model with verdict output.
 
-`Next.js` `TypeScript` `Prisma` `Claude (Haiku)` · **Production**
+`Next.js` `TypeScript` `Prisma` `Claude (Haiku)` · Built for continuous operational use
 
 ---
 
@@ -54,7 +56,7 @@ LLM-based system for parsing Finnish housing company documents and producing str
 
 React component library for admin interfaces with built-in accessibility constraints: forms, tables, modals, and DOM-level audit tooling. Tested with screen readers and keyboard-only navigation.
 
-`React` `TypeScript` `Tailwind CSS` · **Production**
+`React` `TypeScript` `Tailwind CSS` · Designed for live WordPress production environments
 
 ---
 
@@ -62,7 +64,7 @@ React component library for admin interfaces with built-in accessibility constra
 
 Generative Engine Optimization pipeline for WordPress content targeting AI search systems (ChatGPT, Perplexity, Google AI Overviews). Includes human-in-the-loop approval before publishing.
 
-`Python` `Streamlit` `Claude API` `WordPress REST API` · **Production**
+`Python` `Streamlit` `Claude API` `WordPress REST API` · Built for continuous operational use
 
 ---
 
@@ -76,7 +78,6 @@ Generative Engine Optimization pipeline for WordPress content targeting AI searc
 
 ## Principle
 
-> Most software fails at scale because it ignores production reality.  
-> Most accessibility work fails because it ignores system design.
+> AI systems fail when reliability, accessibility, and operational constraints are treated as secondary concerns.
 >
-> I work in the intersection where both matter.
+> I work at the intersection where all three must be solved simultaneously.
