@@ -1,20 +1,26 @@
 # Mikko Tarkiainen
 
-Finnish engineer specializing in AI-driven accessibility systems, LLM orchestration, and production-grade automation pipelines.
+Applied AI & Systems Engineer building production-grade systems around LLM
+orchestration, backend architecture, and real-world API integrations.
 
-Based in Finland · [wpsaavutettavuus.fi](https://wpsaavutettavuus.fi)
+Based in Finland · Open to freelance, remote roles, and partnerships
 
 ---
 
 ## Focus
 
-I design and implement systems that combine:
+I design and implement systems where language models operate reliably in production:
 
-- Large language models (Claude, OpenAI)
-- Deterministic backend logic and event-driven architectures
-- Real-world API integrations with robust error handling and edge case coverage
-
-In parallel, I work on system-level accessibility engineering: semantic HTML, interaction models, and component behavior aligned with WCAG 2.2 AA — tested with real assistive technologies.
+- **LLM orchestration** (Claude, Anthropic SDK, OpenAI) — multi-pass extraction,
+  structured output enforcement, schema validation
+- **Hybrid systems** — probabilistic LLM reasoning combined with deterministic
+  validation layers to eliminate hallucinations and ensure production-safe outputs
+- **Event-driven backend architecture** (BullMQ, Redis, PostgreSQL) and
+  serverless infrastructure
+- **API orchestration** across heterogeneous data sources (REST, GraphQL,
+  WMTS, WFS)
+- **Accessibility (WCAG 2.2 AA)**, security hardening, and observability as
+  engineering constraints embedded into system design
 
 No overlays. No superficial fixes. Code-level implementation.
 
@@ -22,62 +28,98 @@ No overlays. No superficial fixes. Code-level implementation.
 
 ## Selected Production Systems
 
-The projects below are part of a broader effort to build AI-assisted accessibility infrastructure and operational automation systems for real-world production environments.
+### [Luukku AI](https://luukkuai.win/) — LLM-Powered Document Intelligence & Risk Scoring
 
-### [A11Y Lead Engine — Accessibility + AI Automation Pipeline](https://github.com/mikko-lab/a11y-lead-engine)
+LLM-based system that converts unstructured Finnish real-estate documents into
+reliable 0–10 risk scores and automated executive summaries. Built on a 2-pass
+extraction architecture: the first stage gathers raw data, the second validates
+facts, assigns confidence scores, and enforces JSON schema compliance —
+eliminating hallucinations in production with zero manual oversight.
 
-AI-driven system that audits WordPress sites for WCAG 2.2 AA issues, generates structured Finnish summaries, enriches leads with business data, and automates outreach workflows. Integrates legal and business context (Finlex, company registries) for prioritization and messaging.
-
-`TypeScript` `BullMQ` `Playwright` `axe-core` `Prisma` · Used in real-world accessibility auditing workflows
-
----
-
-### [WPSA Booking — Accessible Scheduling System](https://github.com/mikko-lab/wpsa-booking)
-
-Event-driven booking engine with zero-touch calendar synchronization and automatic meeting link generation (Google Meet / Microsoft Teams).
-
-- Timeslot locking & collision prevention
-- Auto-expiring reservations
-- WCAG 2.2 AA compliant UI flows
-
-`React` `TypeScript` `PHP` `OAuth 2.0` `WordPress REST API` · Built for live WordPress production environments
+`Python` · `Claude API` · `Next.js` · `Prisma` · `LLM pipelines`
 
 ---
 
-### [Luukku AI — Real Estate Document Intelligence](https://github.com/mikko-lab/luukku-ai)
+### [Karikko](https://github.com/mikko-lab/karikko) — Crowdsourced Geospatial System for Finnish Waters
 
-LLM-based system for parsing Finnish housing company documents and producing structured financial risk analysis — 0–10 scoring model with verdict output.
+Production mobile app and serverless backend orchestrating seven public APIs
+(SYKE, Finnish Transport Infrastructure Agency, Traficom, FMI, Digitraffic AIS,
+EMODnet, Cloudflare) into a unified real-time situational picture for boaters.
+Crowdsourced hazard map with community confirmations, offline-first design
+(SQLite), GDPR-compliant data storage, Cloudflare Turnstile abuse protection.
 
-`Next.js` `TypeScript` `Prisma` `Claude (Haiku)` · Built for continuous operational use
+`React Native` · `Expo` · `TypeScript` · `MapLibre` · `Next.js 15` ·
+`Neon PostgreSQL` · `Vercel Edge`
+
+Backend repo: [karikko-api](https://github.com/mikko-lab/karikko-api)
 
 ---
 
-### [AAFT — Accessible Admin Component System](https://github.com/mikko-lab/aaft)
+### [A11Y Lead Engine](https://github.com/mikko-lab/a11y-lead-engine) — Automated Audit & Outreach Pipeline
 
-React component library for admin interfaces with built-in accessibility constraints: forms, tables, modals, and DOM-level audit tooling. Tested with screen readers and keyboard-only navigation.
+Production TypeScript-based WCAG 2.2 AA scanner that discovers Finnish business
+sites, performs accessibility audits, and enriches leads with YTJ/Kauppalehti
+business data. Claude-powered summaries enable personalized outreach.
+Hardened infrastructure following a production compromise: Redis authentication,
+API middleware, SSRF/DNS rebinding protection, root execution removal,
+Vitest test coverage, GitHub Actions CI.
 
-`React` `TypeScript` `Tailwind CSS` · Designed for live WordPress production environments
+`Node.js` · `TypeScript` · `Playwright` · `axe-core` · `Redis` · `BullMQ` ·
+`Claude API`
 
 ---
 
-### [GEO Agent — AI Search Optimization System](https://github.com/mikko-lab/geo-agent)
+### FieldComm — Post-Quantum Field Command Protocol (PoC)
 
-Generative Engine Optimization pipeline for WordPress content targeting AI search systems (ChatGPT, Perplexity, Google AI Overviews). Includes human-in-the-loop approval before publishing.
+Proof-of-concept for a quantum-resistant communication protocol designed for
+high-resilience environments such as the EU Iris² satellite constellation and
+LoRa-mesh networks. 50-byte command structure optimized for low-bandwidth and
+high-latency links. Shamir's Secret Sharing (3/5) key management and Duress
+Vault pattern for physical coercion protection.
 
-`Python` `Streamlit` `Claude API` `WordPress REST API` · Built for continuous operational use
+`Node.js` · `ML-KEM (FIPS 203)` · `ML-DSA (FIPS 204)` · `AES-256-GCM`
+
+---
+
+### STRATUM — High-Performance 3D Simulation Engine
+
+Zero-dependency (0 npm packages) 3D simulation demonstrating real-time routing
+and collision avoidance for 150 vehicles in-browser at 60 FPS. Hamiltonian
+energy minimization and repulsive safety potentials. Accessibility at the core
+of design: prefers-reduced-motion support and semantic ARIA mapping for the
+3D environment.
+
+`Vanilla JavaScript` · `Three.js` · `Hamiltonian mechanics` · `WCAG 2.2 AA`
 
 ---
 
 ## Tech Stack
 
-`TypeScript` `Python` `Node.js` `React` `PHP`  
-`Claude API` `OpenAI` `Redis` `Prisma` `Playwright` `axe-core`  
-`OAuth 2.0` `WordPress` `WCAG 2.2 AA`
+**LLM & AI:** Claude API · Anthropic SDK · OpenAI · RAG architectures ·
+Multi-pass extraction · Deterministic validation
+
+**Languages:** TypeScript · Node.js · Python · React · React Native
+
+**Backend:** Next.js 15 · BullMQ · Redis · PostgreSQL · Prisma · Neon serverless
+
+**Infrastructure:** Vercel Edge · Docker · Hetzner · Linux · Cloudflare ·
+OAuth 2.0 · System hardening
+
+**Accessibility:** WCAG 2.2 AA · ARIA · Semantic HTML · NVDA/VoiceOver testing
+· Mobile accessibility (React Native)
 
 ---
 
 ## Principle
 
-> AI systems fail when reliability, accessibility, and operational constraints are treated as secondary concerns.
->
-> I work at the intersection where all three must be solved simultaneously.
+LLM systems fail in production when reliability, validation, and operational
+constraints are treated as afterthoughts.
+
+I work at the intersection where probabilistic LLM reasoning meets
+deterministic backend logic — where hallucinations must be eliminated, not
+just monitored; where accessibility is engineered into the architecture, not
+audited at the end; and where systems must be both intelligent and dependable.
+
+---
+
+📫 [LinkedIn](https://www.linkedin.com/in/mikko-tarkiainen-accessibility/)
