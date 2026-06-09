@@ -11,8 +11,7 @@ Based in Finland · Open to freelance, remote roles, and partnerships
 
 I design and implement systems where language models operate reliably in production:
 
-- **LLM orchestration** (Claude, Anthropic SDK, OpenAI) — multi-pass extraction,
-  structured output enforcement, schema validation
+- **LLM orchestration with Claude & the Anthropic SDK** — multi-pass extraction, structured output enforcement, schema validation
 - **Hybrid systems** — probabilistic LLM reasoning combined with deterministic
   validation layers to eliminate hallucinations and ensure production-safe outputs
 - **Event-driven backend architecture** (BullMQ, Redis, PostgreSQL) and
