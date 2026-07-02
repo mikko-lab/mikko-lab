@@ -56,6 +56,13 @@ Production TypeScript WCAG 2.2 AA scanner that discovers Finnish business sites,
 
 → [a11y-lead-engine](https://github.com/mikko-lab/a11y-lead-engine)
 
+### WPSA ZeroClick Sync — Accessible WordPress Booking Plugin
+A booking plugin built on the principle that "accessible" means real semantic HTML, not ARIA labels bolted onto `<div onClick>` patterns. Zero-click calendar sync automatically creates Google Meet/Microsoft Teams links, sends `.ics` invites with the video link embedded, and syncs both calendars — no copy-pasting, no manual follow-up. Timeslot locking (5-minute expiry) prevents double-bookings without polling or WebSockets. WCAG 2.2 AA throughout: keyboard-navigable calendar grid, screen-reader announcements, `<dl>` for structured data. IBM Equal Access Checker: 0 violations.
+
+`React 18 · TypeScript · Tailwind CSS · WordPress REST API · OAuth 2.0 (Google Calendar, Microsoft Graph) · AES-256-CBC · Factory pattern`
+
+→ [wpsa-booking](https://github.com/mikko-lab/wpsa-booking)
+
 ### FieldComm — Post-Quantum Communication Protocol (PoC)
 Proof of concept for a quantum-resistant communication protocol: a 50-byte command frame optimised for low-bandwidth links, Shamir's Secret Sharing (3/5) key management, and a duress-vault pattern for coercion resistance. Targeted conceptually at the EU Iris² satellite constellation and LoRa mesh as transport. The README openly documents the PoC's known limitations and a realistic production path — with NCSC-FI / Common Criteria certification framed as a future phase, not a current state.
 
