@@ -21,6 +21,13 @@ No overlays. No superficial fixes. Code-level implementation.
 
 ## Selected Work
 
+### Kopilotti — Real-Time AI Sales Co-Pilot for Automotive Retail
+Real-time conversation intelligence for car sales: browser-based speech-to-text feeds a Claude-powered intent analysis pipeline that surfaces buying signals (price hesitation, financing interest, trade-in) and a live purchase-readiness score mid-conversation. Structured JSON output is designed to trigger CRM/ERP workflows (follow-up tasks, financing pre-fill, trade-in valuation). Built on 20 years of hands-on automotive retail experience — the signal taxonomy reflects real sales-floor patterns, not generic assumptions.
+
+`Vanilla JS · Web Speech API · Node.js · Express · Server-Sent Events · Claude API · Railway`
+
+→ [kopilotti-demo](https://github.com/mikko-lab/kopilotti-demo) · [live demo](https://mikko-lab.github.io/kopilotti-demo/)
+
 ### Provenanssi — Provenance Layer for Generative Image Restoration
 A deterministic layer that labels every pixel of a restored image as *measured* or *invented* — separating what the input forces from what the model's prior fabricates (range–null space decomposition). Built as open research: pre-registered hypotheses, locked thresholds, and honest null results. Confirmed finding: calibration slope is content-dependent, verified pre-registered and robust to leave-one-out. One-command falsification test; WCAG AA accessible demo; full research log — including every retraction — public.
 
@@ -33,12 +40,14 @@ LLM-based system that converts unstructured Finnish real-estate documents into r
 
 `Python · Claude API · Next.js · Prisma · LLM pipelines`
 
+→ [live demo](https://luukkuai.win)
+
 ### Karikko — Crowdsourced Geospatial System for Finnish Waters
 Production mobile app and serverless backend orchestrating seven public APIs (SYKE, Finnish Transport Infrastructure Agency, Traficom, FMI, Digitraffic AIS, EMODnet, Cloudflare) into a unified real-time situational picture for boaters. Crowdsourced hazard map with community confirmations, offline-first design (SQLite), GDPR-compliant storage, Cloudflare Turnstile abuse protection.
 
 `React Native · Expo · TypeScript · MapLibre · Next.js 15 · Neon PostgreSQL · Vercel Edge`
 
-→ [karikko](https://github.com/mikko-lab/karikko) · [karikko-api](https://github.com/mikko-lab/karikko-api)
+→ [frontend](https://github.com/mikko-lab/karikko) · [backend](https://github.com/mikko-lab/karikko-api) · [live demo](https://demo.nordicmarinedata.com)
 
 ### A11Y Lead Engine — Automated Audit & Outreach Pipeline
 Production TypeScript WCAG 2.2 AA scanner that discovers Finnish business sites, runs accessibility audits, and enriches leads with business-registry data. Claude-powered summaries enable personalised outreach. Hardened infrastructure following a production compromise: Redis authentication, API middleware, SSRF/DNS-rebinding protection, root-execution removal, Vitest coverage, GitHub Actions CI.
@@ -66,6 +75,7 @@ Zero-dependency (0 npm packages) 3D simulation demonstrating real-time routing a
 **Languages:** TypeScript · Node.js · Python · PyTorch · React · React Native
 **Backend:** Next.js 15 · BullMQ · Redis · PostgreSQL · Prisma · Neon serverless
 **Infrastructure:** Vercel Edge · Docker · Hetzner · Linux · Cloudflare · OAuth 2.0 · System hardening
+**Real-time & voice:** Web Speech API · Server-Sent Events · Real-time streaming pipelines
 **Accessibility:** WCAG 2.2 AA · ARIA · Semantic HTML · NVDA/VoiceOver testing · Mobile accessibility (React Native)
 
 ## Principle
