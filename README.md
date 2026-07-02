@@ -4,6 +4,8 @@
 
 Based in Finland · Open to freelance, remote roles, and partnerships
 
+**Accessibility consulting & WCAG 2.2 AA audits:** [wpsaavutettavuus.fi](https://wpsaavutettavuus.fi)
+
 ## Focus
 
 I build production-grade systems along two complementary axes — **agentic LLM orchestration** and **disciplined experimental ML research** — unified by one principle: a *deterministic safety layer wrapped around a probabilistic model*.
