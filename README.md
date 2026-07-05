@@ -1,10 +1,8 @@
 # Mikko Tarkiainen
 
-**Full-breadth AI Engineer** · Agentic systems, deterministic safety layers, accessibility-first
+**Full-breadth AI Engineer** · Agentic systems, deterministic safety layers, production reliability
 
 Based in Finland · Open to freelance, remote roles, and partnerships
-
-**Accessibility consulting & WCAG 2.2 AA audits:** [wpsaavutettavuus.fi](https://wpsaavutettavuus.fi)
 
 ## Focus
 
@@ -21,12 +19,19 @@ No overlays. No superficial fixes. Code-level implementation.
 
 ## Selected Work
 
-### Kopilotti — Real-Time AI Sales Co-Pilot for Automotive Retail
-Real-time conversation intelligence for car sales: browser-based speech-to-text feeds a Claude-powered intent analysis pipeline that surfaces buying signals (price hesitation, financing interest, trade-in) and a live purchase-readiness score mid-conversation. Structured JSON output is designed to trigger CRM/ERP workflows (follow-up tasks, financing pre-fill, trade-in valuation). Built on 20 years of hands-on automotive retail experience — the signal taxonomy reflects real sales-floor patterns, not generic assumptions.
+### refuse-dont-guess — Deterministic Guardrail for an LLM Agent on a Critical Data Path
+A safety layer for an LLM agent on a critical data path (VAT classification for purchase invoices): the agent extracts facts, a deterministic rule decides, and an uncertain case escalates to a human instead of being guessed at. A 1,000-run determinism check confirms the same input always produces the same decision; four security regression tests cover prompt-injection bypass attempts. Zero dependencies — pure Python standard library, auditable in a single file.
 
-`Vanilla JS · Web Speech API · Node.js · Express · Server-Sent Events · Claude API · Railway`
+`Python (standard library only)`
 
-→ [kopilotti-demo](https://github.com/mikko-lab/kopilotti-demo) · [live demo](https://mikko-lab.github.io/kopilotti-demo/)
+→ [refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess)
+
+### claude-code-invoice-guard — Guardrail for Claude Code's Runtime Primitives
+A sibling project to refuse-dont-guess, rebuilt as native Claude Code orchestration — all four runtime primitives in one installable plugin: skill, subagent, MCP server, PreToolUse hook. Live verification surfaced two real bugs, both fixed and re-verified. The bug proved the architecture's core claim in practice: when the subagent hallucinated a figure in its report, the actual VAT decision was still recalculated from ground truth inside the hook.
+
+`Claude Code · Python · MCP server · Skill · Subagent · PreToolUse hook`
+
+→ [claude-code-invoice-guard](https://github.com/mikko-lab/claude-code-invoice-guard)
 
 ### Provenanssi — Provenance Layer for Generative Image Restoration
 A deterministic layer that labels every pixel of a restored image as *measured* or *invented* — separating what the input forces from what the model's prior fabricates (range–null space decomposition). Built as open research: pre-registered hypotheses, locked thresholds, and honest null results. Confirmed finding: calibration slope is content-dependent, verified pre-registered and robust to leave-one-out. One-command falsification test; WCAG AA accessible demo; full research log — including every retraction — public.
@@ -34,6 +39,13 @@ A deterministic layer that labels every pixel of a restored image as *measured* 
 `Python · PyTorch · ResShift (diffusion) · Range–null decomposition · Pre-registered statistical analysis`
 
 → [provenanssi](https://github.com/mikko-lab/provenanssi)
+
+### tutkinta-avustin — AI Assistant for Investigative Work, Built for Verifiability
+An AI assistant built around verifiability rather than raw model output. A LangGraph state machine runs hard-coded guardrail rules after every node, with a hash-chained audit log that detects tampering. Contrasts three perspectives on one synthetic case — traditional manual process, naive AI, and AI with deterministic guardrails — side by side in a Streamlit UI. 20 passing pytest tests, hash-locked dependencies with SHA-256 verification.
+
+`Python · LangGraph · Streamlit`
+
+→ [tutkinta-avustin](https://github.com/mikko-lab/tutkinta-avustin)
 
 ### Luukku AI — LLM-Powered Document Intelligence & Risk Scoring
 LLM-based system that converts unstructured Finnish real-estate documents into reliable 0–10 risk scores and automated summaries. A 2-pass extraction architecture: the first stage gathers raw data, the second validates facts, assigns confidence scores, and enforces JSON-schema compliance — eliminating hallucination in production with zero manual oversight.
@@ -50,39 +62,21 @@ Production mobile app and serverless backend orchestrating seven public APIs (SY
 → [frontend](https://github.com/mikko-lab/karikko) · [backend](https://github.com/mikko-lab/karikko-api) · [live demo](https://demo.nordicmarinedata.com)
 
 ### A11Y Lead Engine — Automated Audit & Outreach Pipeline
-Production TypeScript WCAG 2.2 AA scanner that discovers Finnish business sites, runs accessibility audits, and enriches leads with business-registry data. Claude-powered summaries enable personalised outreach. Hardened infrastructure following a production compromise: Redis authentication, API middleware, SSRF/DNS-rebinding protection, root-execution removal, Vitest coverage, GitHub Actions CI.
+Production TypeScript WCAG 2.2 AA scanner (~7,500 lines of production code, running on Hetzner) that discovers Finnish business sites, runs accessibility audits, and enriches leads with business-registry data. Claude-powered summaries enable personalised outreach. Hardened infrastructure following a production compromise: Redis authentication, API middleware, SSRF/DNS-rebinding protection, root-execution removal, Vitest coverage, GitHub Actions CI.
 
 `Node.js · TypeScript · Playwright · axe-core · Redis · BullMQ · Claude API`
 
 → [a11y-lead-engine](https://github.com/mikko-lab/a11y-lead-engine)
 
-### WPSA ZeroClick Sync — Accessible WordPress Booking Plugin
-A booking plugin built on the principle that "accessible" means real semantic HTML, not ARIA labels bolted onto `<div onClick>` patterns. Zero-click calendar sync automatically creates Google Meet/Microsoft Teams links, sends `.ics` invites with the video link embedded, and syncs both calendars — no copy-pasting, no manual follow-up. Timeslot locking (5-minute expiry) prevents double-bookings without polling or WebSockets. WCAG 2.2 AA throughout: keyboard-navigable calendar grid, screen-reader announcements, `<dl>` for structured data. IBM Equal Access Checker: 0 violations.
-
-`React 18 · TypeScript · Tailwind CSS · WordPress REST API · OAuth 2.0 (Google Calendar, Microsoft Graph) · AES-256-CBC · Factory pattern`
-
-→ [wpsa-booking](https://github.com/mikko-lab/wpsa-booking)
-
-### FieldComm — Post-Quantum Communication Protocol (PoC)
-Proof of concept for a quantum-resistant communication protocol: a 50-byte command frame optimised for low-bandwidth links, Shamir's Secret Sharing (3/5) key management, and a duress-vault pattern for coercion resistance. Targeted conceptually at the EU Iris² satellite constellation and LoRa mesh as transport. The README openly documents the PoC's known limitations and a realistic production path — with NCSC-FI / Common Criteria certification framed as a future phase, not a current state.
-
-`Node.js · ML-KEM-768 (FIPS 203) · ML-DSA-65 (FIPS 204) · AES-256-GCM`
-
-→ [fieldcomm](https://github.com/mikko-lab/fieldcomm)
-
-### STRATUM — High-Performance 3D Simulation Engine
-Zero-dependency (0 npm packages) 3D simulation demonstrating real-time routing and collision avoidance for 150 vehicles in-browser at 60 FPS. Hamiltonian energy minimisation and repulsive safety-potential fields. Accessibility at the core: prefers-reduced-motion support and semantic ARIA mapping for the 3D environment.
-
-`Vanilla JavaScript · Three.js · Hamiltonian mechanics · WCAG 2.2 AA`
+*Also offering WCAG 2.2 AA accessibility consulting — [wpsaavutettavuus.fi](https://wpsaavutettavuus.fi)*
 
 ## Tech Stack
 
-**LLM & AI:** Claude API · Anthropic SDK · Agentic orchestration · RAG architectures · Multi-pass extraction · Deterministic validation
+**LLM & AI:** Claude API · Anthropic SDK · LangGraph · Agentic orchestration · RAG architectures · Multi-pass extraction · Deterministic guardrails · Prompt-injection defense
 **ML research:** Model calibration · Uncertainty quantification · Range–null decomposition · Pre-registered design · Statistical analysis
 **Languages:** TypeScript · Node.js · Python · PyTorch · React · React Native
 **Backend:** Next.js 15 · BullMQ · Redis · PostgreSQL · Prisma · Neon serverless
 **Infrastructure:** Vercel Edge · Docker · Hetzner · Linux · Cloudflare · OAuth 2.0 · System hardening
-**Real-time & voice:** Web Speech API · Server-Sent Events · Real-time streaming pipelines
 **Accessibility:** WCAG 2.2 AA · ARIA · Semantic HTML · NVDA/VoiceOver testing · Mobile accessibility (React Native)
 
 ## Principle
