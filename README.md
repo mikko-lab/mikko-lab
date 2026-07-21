@@ -47,12 +47,19 @@ An AI assistant built around verifiability rather than raw model output. A LangG
 
 → [tutkinta-avustin](https://github.com/mikko-lab/tutkinta-avustin)
 
-### Luukku AI — LLM-Powered Document Intelligence & Risk Scoring
-LLM-based system that converts unstructured Finnish real-estate documents into reliable 0–10 risk scores and automated summaries. A 2-pass extraction architecture: the first stage gathers raw data, the second validates facts, assigns confidence scores, and enforces JSON-schema compliance — eliminating hallucination in production with zero manual oversight.
+### Kopilotti Sales — Deterministic Digital Car Salesperson
+A customer-facing digital car salesperson that negotiates price 24/7 — but the negotiation logic is deterministic, not LLM-generated: the dealer configures the acceptance floor and counter-offer steps, the system enforces them, and the LLM never sees or decides the price. Database-level reservation locking (partial unique index, not application-level check-then-act) prevents two customers from reaching payment for the same vehicle simultaneously. A fail-safe external availability check halts the purchase before payment if the dealer's own system can't confirm the vehicle is still available. Includes a multi-tenant DMS import pipeline (dry-run preview → explicit approval → atomic apply) with hash-chained audit trail, and a security review — authentication, output-escaping, and network-isolation fixes verified against live production traffic.
 
-`Python · Claude API · Next.js · Prisma · LLM pipelines`
+`Node.js · Express · PostgreSQL`
 
-→ [live demo](https://luukkuai.win)
+→ [live demo](https://kopilotti-sales-demo.vercel.app)
+
+### osCommerce Checkout Modernization — AI-Native Legacy Refactoring, Verified
+A self-directed proof of concept testing an AI-native development workflow against real, unfamiliar legacy code: one representative checkout process from osCommerce, an open-source PHP platform untouched since 2016. A context document mapping business rules was written before any code changes; its first draft got a business rule backwards, trusting a stale 2006 code comment over the code's actual behavior, caught by a failing test rather than a second read. git blame traced the bug to a specific 2015 commit that flipped a condition's logic during a database-layer migration, still live in osCommerce's public master branch ten years later. Four extracted, independently tested units; 34 passing tests; behavior preserved exactly, with the pre-existing bug documented rather than silently fixed.
+
+`PHP · PHPUnit · Composer (PSR-4) · Claude Code · Git`
+
+→ [sap-checkout-refactor](https://github.com/mikko-lab/sap-checkout-refactor)
 
 ### Karikko — Crowdsourced Geospatial System for Finnish Waters
 Production mobile app and serverless backend orchestrating seven public APIs (SYKE, Finnish Transport Infrastructure Agency, Traficom, FMI, Digitraffic AIS, EMODnet, Cloudflare) into a unified real-time situational picture for boaters. Crowdsourced hazard map with community confirmations, offline-first design (SQLite), GDPR-compliant storage, Cloudflare Turnstile abuse protection.
