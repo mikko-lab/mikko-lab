@@ -54,6 +54,13 @@ A customer-facing digital car salesperson that negotiates price 24/7 — but the
 
 → [live demo](https://kopilotti-sales-demo.vercel.app)
 
+### ruuhkavahti — Kafka-Scale Guardrail Under Load
+A deterministic PASS/ESCALATE/BLOCK safety layer (adapted from refuse-dont-guess) running inside a scalable Kafka consumer group, load-tested against a simulated live-TV traffic spike (8,000 msg/s). Peak consumer lag drops from 1,489ms to 400ms as consumers scale 1→4 — measured against the real running stack, not simulated. A WCAG 2.1/2.2 AA accessible dashboard shows the same lag data as a 3D visualization, a reduced-motion 2D gauge, and a semantic HTML table — axe-core clean in both modes. Docker Compose orchestrates 6 services; consumer scaling and Kafka rebalance strategies (KIP-429) run live.
+
+`Python · TypeScript · Apache Kafka · Docker Compose · axe-core`
+
+→ [ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)
+
 ### osCommerce Checkout Modernization — AI-Native Legacy Refactoring, Verified
 A self-directed proof of concept testing an AI-native development workflow against real, unfamiliar legacy code: one representative checkout process from osCommerce, an open-source PHP platform untouched since 2016. A context document mapping business rules was written before any code changes; its first draft got a business rule backwards, trusting a stale 2006 code comment over the code's actual behavior, caught by a failing test rather than a second read. git blame traced the bug to a specific 2015 commit that flipped a condition's logic during a database-layer migration, still live in osCommerce's public master branch ten years later. Four extracted, independently tested units; 34 passing tests; behavior preserved exactly, with the pre-existing bug documented rather than silently fixed.
 
