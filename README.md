@@ -104,7 +104,7 @@ The result:
 
 **PHP · PHPUnit · Composer · Claude Code · Git**
 
-→ [Repository](https://github.com/mikko-lab/sap-checkout-refactor)
+→ [Repository](https://github.com/mikko-lab/sap-checkout-refactor/tree/poc/checkout-modernization)
 
 ---
 
