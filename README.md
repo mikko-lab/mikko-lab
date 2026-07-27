@@ -1,98 +1,200 @@
 # Mikko Tarkiainen
 
-**Full-breadth AI Engineer** · Agentic systems, deterministic safety layers, production reliability
+**AI Systems Engineer · Deterministic decision systems · Production reliability**
 
-Based in Finland · Open to freelance, remote roles, and partnerships
+Based in Finland · Open to freelance work, remote roles, and partnerships
+
+I build AI systems in which language models handle interpretation and interaction, while deterministic software controls decisions, validation, security, and escalation.
+
+My work focuses on moving LLM applications beyond demos: into systems that are testable, auditable, accessible, and safe to operate on real business-critical paths.
 
 ## Focus
 
-I build production-grade systems along two complementary axes — **agentic LLM orchestration** and **disciplined experimental ML research** — unified by one principle: a *deterministic safety layer wrapped around a probabilistic model*.
+- **Agentic systems** — structured orchestration, tool use, state machines, and schema-enforced outputs
+- **Deterministic guardrails** — explicit PASS, ESCALATE, BLOCK, ACCEPT, COUNTER, and REJECT decisions outside the language model
+- **Production backends** — Node.js, TypeScript, Python, PostgreSQL, Redis, BullMQ, Kafka, and Docker
+- **AI security** — prompt-injection containment, output validation, SSRF protection, authentication, and network isolation
+- **Accessibility by architecture** — WCAG 2.2 AA, semantic interfaces, keyboard support, and screen-reader testing
+- **Verification-first development** — tests, audit trails, measured failure modes, and execution-based validation
 
-- **LLM orchestration** with Claude & the Anthropic SDK — multi-pass extraction, structured-output enforcement, schema validation
-- **Hybrid systems** — probabilistic LLM reasoning paired with deterministic validation to eliminate hallucination, not just monitor it
-- **Experimental ML research** — model calibration, uncertainty quantification, range–null space decomposition; pre-registered, with honest null results
-- **Event-driven backend** (BullMQ, Redis, PostgreSQL) and serverless infrastructure
-- **API orchestration** across heterogeneous sources (REST, GraphQL, WMTS, WFS)
-- **Accessibility** (WCAG 2.2 AA), security hardening, and observability as engineering constraints embedded into system design
+> **The model may interpret, propose, and communicate.
+> Deterministic software decides what the system is allowed to do.**
 
-No overlays. No superficial fixes. Code-level implementation.
+---
 
-## Selected Work
+# Selected Work
 
-### refuse-dont-guess — Deterministic Guardrail for an LLM Agent on a Critical Data Path
-A safety layer for an LLM agent on a critical data path (VAT classification for purchase invoices): the agent extracts facts, a deterministic rule decides, and an uncertain case escalates to a human instead of being guessed at. A 1,000-run determinism check confirms the same input always produces the same decision; four security regression tests cover prompt-injection bypass attempts. Zero dependencies — pure Python standard library, auditable in a single file.
+## Kopilotti Sales — Deterministic Digital Car Salesperson
 
-`Python (standard library only)`
+A customer-facing digital sales channel for used-vehicle price negotiation.
 
-→ [refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess)
+The language model handles the conversation, but it never determines the price. Dealer-defined business rules control offer acceptance, counteroffers, rejection, and escalation.
 
-### claude-code-invoice-guard — Guardrail for Claude Code's Runtime Primitives
-A sibling project to refuse-dont-guess, rebuilt as native Claude Code orchestration — all four runtime primitives in one installable plugin: skill, subagent, MCP server, PreToolUse hook. Live verification surfaced two real bugs, both fixed and re-verified. The bug proved the architecture's core claim in practice: when the subagent hallucinated a figure in its report, the actual VAT decision was still recalculated from ground truth inside the hook.
+The system includes:
 
-`Claude Code · Python · MCP server · Skill · Subagent · PreToolUse hook`
+- deterministic negotiation states
+- database-level vehicle reservation locking
+- fail-safe external availability checks
+- mandatory condition-report acknowledgement
+- multi-tenant DMS import with dry-run, approval, and atomic application
+- audit trails for commercial decisions
+- security controls verified against the deployed application
 
-→ [claude-code-invoice-guard](https://github.com/mikko-lab/claude-code-invoice-guard)
+**Node.js · Express · PostgreSQL · JavaScript · Claude API**
 
-### Provenanssi — Provenance Layer for Generative Image Restoration
-A deterministic layer that labels every pixel of a restored image as *measured* or *invented* — separating what the input forces from what the model's prior fabricates (range–null space decomposition). Built as open research: pre-registered hypotheses, locked thresholds, and honest null results. Confirmed finding: calibration slope is content-dependent, verified pre-registered and robust to leave-one-out. One-command falsification test; WCAG AA accessible demo; full research log — including every retraction — public.
+→ [Repository](https://github.com/mikko-lab/kopilotti-sales-demo) · [Live demo](https://kopilotti-sales-demo.vercel.app/)
 
-`Python · PyTorch · ResShift (diffusion) · Range–null decomposition · Pre-registered statistical analysis`
+---
 
-→ [provenanssi](https://github.com/mikko-lab/provenanssi)
+## Ruuhkavahti — Kafka-Scale Guardrails Under Load
 
-### tutkinta-avustin — AI Assistant for Investigative Work, Built for Verifiability
-An AI assistant built around verifiability rather than raw model output. A LangGraph state machine runs hard-coded guardrail rules after every node, with a hash-chained audit log that detects tampering. Contrasts three perspectives on one synthetic case — traditional manual process, naive AI, and AI with deterministic guardrails — side by side in a Streamlit UI. 20 passing pytest tests, hash-locked dependencies with SHA-256 verification.
+A deterministic PASS / ESCALATE / BLOCK layer operating inside a scalable Kafka consumer group.
 
-`Python · LangGraph · Streamlit`
+The system was load-tested against a simulated live-TV traffic spike of 8,000 messages per second. Consumer capacity scales from one to four workers while the dashboard exposes real consumer lag, duplicate handling, and Kafka rebalance behaviour.
 
-→ [tutkinta-avustin](https://github.com/mikko-lab/tutkinta-avustin)
+The same operational data is available through:
 
-### Kopilotti Sales — Deterministic Digital Car Salesperson
-A customer-facing digital car salesperson that negotiates price 24/7 — but the negotiation logic is deterministic, not LLM-generated: the dealer configures the acceptance floor and counter-offer steps, the system enforces them, and the LLM never sees or decides the price. Database-level reservation locking (partial unique index, not application-level check-then-act) prevents two customers from reaching payment for the same vehicle simultaneously. A fail-safe external availability check halts the purchase before payment if the dealer's own system can't confirm the vehicle is still available. Includes a multi-tenant DMS import pipeline (dry-run preview → explicit approval → atomic apply) with hash-chained audit trail, and a security review — authentication, output-escaping, and network-isolation fixes verified against live production traffic.
+- a 3D visualization
+- a reduced-motion 2D view
+- a semantic HTML table
+- accessible live status updates
 
-`Node.js · Express · PostgreSQL`
+**Python · TypeScript · Apache Kafka · Docker Compose · axe-core**
 
-→ [live demo](https://kopilotti-sales-demo.vercel.app)
+→ [Repository](https://github.com/mikko-lab/ruuhkavahti)
 
-### ruuhkavahti — Kafka-Scale Guardrail Under Load
-A deterministic PASS/ESCALATE/BLOCK safety layer (adapted from refuse-dont-guess) running inside a scalable Kafka consumer group, load-tested against a simulated live-TV traffic spike (8,000 msg/s). Peak consumer lag drops from 1,489ms to 400ms as consumers scale 1→4 — measured against the real running stack, not simulated. A WCAG 2.1/2.2 AA accessible dashboard shows the same lag data as a 3D visualization, a reduced-motion 2D gauge, and a semantic HTML table — axe-core clean in both modes. Docker Compose orchestrates 6 services; consumer scaling and Kafka rebalance strategies (KIP-429) run live.
+---
 
-`Python · TypeScript · Apache Kafka · Docker Compose · axe-core`
+## A11Y Lead Engine — Automated Accessibility Audit Pipeline
 
-→ [ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)
+A production TypeScript system that discovers Finnish business websites, runs WCAG audits, enriches results with business-registry data, and creates structured outreach material.
 
-### osCommerce Checkout Modernization — AI-Native Legacy Refactoring, Verified
-A self-directed proof of concept testing an AI-native development workflow against real, unfamiliar legacy code: one representative checkout process from osCommerce, an open-source PHP platform untouched since 2016. A context document mapping business rules was written before any code changes; its first draft got a business rule backwards, trusting a stale 2006 code comment over the code's actual behavior, caught by a failing test rather than a second read. git blame traced the bug to a specific 2015 commit that flipped a condition's logic during a database-layer migration, still live in osCommerce's public master branch ten years later. Four extracted, independently tested units; 34 passing tests; behavior preserved exactly, with the pre-existing bug documented rather than silently fixed.
+The system combines Playwright and axe-core scanning with queue-based processing and Claude-assisted summaries.
 
-`PHP · PHPUnit · Composer (PSR-4) · Claude Code · Git`
+Infrastructure hardening includes:
 
-→ [sap-checkout-refactor](https://github.com/mikko-lab/sap-checkout-refactor)
+- Redis authentication
+- API authentication middleware
+- SSRF and DNS-rebinding protection
+- removal of root execution
+- automated Vitest coverage
+- GitHub Actions CI
 
-### Karikko — Crowdsourced Geospatial System for Finnish Waters
-Production mobile app and serverless backend orchestrating seven public APIs (SYKE, Finnish Transport Infrastructure Agency, Traficom, FMI, Digitraffic AIS, EMODnet, Cloudflare) into a unified real-time situational picture for boaters. Crowdsourced hazard map with community confirmations, offline-first design (SQLite), GDPR-compliant storage, Cloudflare Turnstile abuse protection.
+**TypeScript · Node.js · Playwright · axe-core · Redis · BullMQ · Claude API**
 
-`React Native · Expo · TypeScript · MapLibre · Next.js 15 · Neon PostgreSQL · Vercel Edge`
+→ [Repository](https://github.com/mikko-lab/a11y-lead-engine)
 
-→ [frontend](https://github.com/mikko-lab/karikko) · [backend](https://github.com/mikko-lab/karikko-api) · [live demo](https://demo.nordicmarinedata.com)
+---
 
-### A11Y Lead Engine — Automated Audit & Outreach Pipeline
-Production TypeScript WCAG 2.2 AA scanner (~7,500 lines of production code, running on Hetzner) that discovers Finnish business sites, runs accessibility audits, and enriches leads with business-registry data. Claude-powered summaries enable personalised outreach. Hardened infrastructure following a production compromise: Redis authentication, API middleware, SSRF/DNS-rebinding protection, root-execution removal, Vitest coverage, GitHub Actions CI.
+## SAP Checkout Refactor — AI-Assisted Legacy Modernization
 
-`Node.js · TypeScript · Playwright · axe-core · Redis · BullMQ · Claude API`
+A proof of concept for applying an AI-native development workflow to unfamiliar legacy commerce code (an osCommerce checkout flow, not SAP software).
 
-→ [a11y-lead-engine](https://github.com/mikko-lab/a11y-lead-engine)
+Before modifying the implementation, I mapped the checkout process and its business rules into a context document. The first interpretation contained an inverted inventory rule inherited from a stale comment. A failing test exposed the mistake before the refactor progressed.
 
-*Also offering WCAG 2.2 AA accessibility consulting — [wpsaavutettavuus.fi](https://wpsaavutettavuus.fi)*
+Further investigation with `git blame` traced the inconsistency to a historical database-layer migration.
 
-## Tech Stack
+The result:
 
-**LLM & AI:** Claude API · Anthropic SDK · LangGraph · Agentic orchestration · RAG architectures · Multi-pass extraction · Deterministic guardrails · Prompt-injection defense
-**ML research:** Model calibration · Uncertainty quantification · Range–null decomposition · Pre-registered design · Statistical analysis
-**Languages:** TypeScript · Node.js · Python · PyTorch · React · React Native
-**Backend:** Next.js 15 · BullMQ · Redis · PostgreSQL · Prisma · Neon serverless
-**Infrastructure:** Vercel Edge · Docker · Hetzner · Linux · Cloudflare · OAuth 2.0 · System hardening
-**Accessibility:** WCAG 2.2 AA · ARIA · Semantic HTML · NVDA/VoiceOver testing · Mobile accessibility (React Native)
+- four independently tested units
+- 34 passing tests
+- preserved runtime behaviour
+- documented legacy defect
+- no unsupported claim that the old behaviour was correct
 
-## Principle
+**PHP · PHPUnit · Composer · Claude Code · Git**
 
-LLM systems fail in production when reliability, validation, and operational constraints are treated as afterthoughts. I work where probabilistic reasoning meets deterministic logic — where hallucination must be eliminated, not just monitored; where accessibility is engineered into the architecture, not audited at the end; and where the same discipline applies to my own research as to my code: pre-register before the data, flag what's uncertain, retract what doesn't hold.
+→ [Repository](https://github.com/mikko-lab/sap-checkout-refactor)
+
+---
+
+## Prompt Injection Gate — Tool-Output Security Boundary
+
+A deterministic security layer that quarantines untrusted tool output before it reaches the language model, containing prompt-injection attempts hidden inside tool results instead of relying on the model to recognise and resist them.
+
+The design separates:
+
+- untrusted tool output
+- a structural quarantine boundary the content cannot forge
+- best-effort pattern scanning for known injection techniques
+- PASS, ESCALATE, and BLOCK outcomes
+- a hash-chained, tamper-evident audit log
+
+**Python · LLM security · Deterministic policy enforcement**
+
+→ [Repository](https://github.com/mikko-lab/prompt-injection-gate)
+
+---
+
+## Qubit Harness — Agentic Experimental Control Loop
+
+An agent-driven experimental harness in which the language model proposes the next measurement, but bounded software executes and validates it.
+
+The workflow follows a controlled loop:
+
+```text
+Propose → Execute → Analyse → Decide next → Iterate
+```
+
+The model cannot bypass the harness's amplitude bounds, rate limit, or measurement budget. LangGraph manages the workflow, Pydantic enforces typed state, and Langfuse traces every LLM call and tool invocation.
+
+**Python · LangGraph · Pydantic · Claude · Langfuse**
+
+→ [Repository](https://github.com/mikko-lab/qubit-harness)
+
+---
+
+# Additional Work
+
+## refuse-dont-guess
+
+A zero-dependency Python guardrail for VAT classification on a critical invoice-processing path. Includes a 1,000-run determinism check and prompt-injection regression tests.
+
+→ [Repository](https://github.com/mikko-lab/refuse-dont-guess)
+
+## claude-code-invoice-guard
+
+The same guardrail principle implemented through Claude Code runtime primitives: skill, subagent, MCP server, and PreToolUse hook.
+
+→ [Repository](https://github.com/mikko-lab/claude-code-invoice-guard)
+
+## Provenanssi
+
+Open research into separating measured image information from model-generated reconstruction using range–null space decomposition and pre-registered statistical analysis.
+
+→ [Repository](https://github.com/mikko-lab/provenanssi)
+
+## Karikko
+
+An offline-first geospatial hazard-reporting system for Finnish waters, integrating public environmental, navigation, weather, and vessel-data sources.
+
+→ [Frontend](https://github.com/mikko-lab/karikko) · [Backend](https://github.com/mikko-lab/karikko-api) · [Live demo](https://demo.nordicmarinedata.com)
+
+---
+
+# Technology
+
+**AI and orchestration**
+Claude API · Anthropic SDK · LangGraph · Structured outputs · Tool use · Agent workflows · Prompt-injection defence
+
+**Languages and application development**
+TypeScript · JavaScript · Node.js · Python · PHP · React · React Native · Next.js
+
+**Backend and data**
+PostgreSQL · Redis · BullMQ · Apache Kafka · Prisma · Neon
+
+**Infrastructure and security**
+Docker · Vercel · Hetzner · Linux · Cloudflare · OAuth 2.0 · GitHub Actions · Application hardening
+
+**Accessibility**
+WCAG 2.2 AA · Semantic HTML · ARIA · Keyboard interaction · VoiceOver · NVDA · axe-core · Playwright
+
+---
+
+# Engineering Principle
+
+LLM applications become reliable when probabilistic reasoning is separated from authoritative decision-making.
+
+I use language models where interpretation, synthesis, and interaction are valuable. I use deterministic software where correctness, permissions, money, security, or user safety are involved.
+
+That boundary is designed into the architecture from the beginning — not added after the model reaches production.
