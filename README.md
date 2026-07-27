@@ -120,7 +120,7 @@ The design separates:
 - PASS, ESCALATE, and BLOCK outcomes
 - a hash-chained, tamper-evident audit log
 
-**Python · LLM security · Deterministic policy enforcement**
+**TypeScript · LLM security · Deterministic policy enforcement**
 
 → [Repository](https://github.com/mikko-lab/prompt-injection-gate)
 
