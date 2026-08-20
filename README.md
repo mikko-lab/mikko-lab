@@ -25,7 +25,7 @@ My work focuses on building systems and reference implementations that are testa
 
 An open-source reference implementation for independently verifiable automated decisions.
 
-Versioned business rules execute in three isolated WebAssembly validators. A decision is accepted only when a 2-of-3 quorum produces the same result. Accepted decisions receive cryptographically signed receipts that can be independently checked, batched into a Merkle tree, and optionally anchored to an EVM-compatible smart contract.
+Versioned business rules execute inside three isolated validator processes, each running the same WebAssembly policy package. A decision is accepted only when a 2-of-3 quorum produces the same result. Accepted decisions receive cryptographically signed receipts that can be independently checked, batched into a Merkle tree, and anchored to an EVM-compatible smart contract.
 
 The repository includes Rust validators, TypeScript APIs and SDKs, Solidity contracts, a standalone receipt verifier, reproducible Linux/arm64 builds, SBOM generation, security scanning, and a history-free public release process.
 
@@ -45,7 +45,7 @@ After an accepted price, the reference implementation can demonstrate a concept 
 
 `Node.js · Express · PostgreSQL · JavaScript · Claude API · Playwright`
 
-→ [Repository](https://github.com/mikko-lab/kopilotti-sales-demo) · [Live demo](https://app.kopilotti.online/)
+→ [Repository](https://github.com/mikko-lab/kopilotti-sales-demo) · [Live demo](https://app.kopilotti.online/en/)
 
 ### Ruuhkavahti — Kafka-Scale Guardrails Under Load
 
@@ -95,3 +95,9 @@ LLM applications become reliable when probabilistic reasoning is separated from 
 I use language models where interpretation, synthesis, and interaction are valuable. I use deterministic software where correctness, permissions, money, security, or user safety are involved.
 
 That boundary is designed into the architecture from the beginning — not added after the model reaches production.
+
+## Contact
+
+Open to software partnerships, architecture consulting, selected freelance projects, and remote roles.
+
+[hello@kopilotti.online](mailto:hello@kopilotti.online?subject=Software%20partnership%20inquiry)
