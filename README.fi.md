@@ -19,6 +19,7 @@ Kielimallit tulkitsevat ja kommunikoivat, mutta deterministinen ohjelmisto halli
 
 - **Agenttijärjestelmät** — jäsennelty orkestrointi, työkalujen käyttö ja skeemalla validoidut vastaukset
 - **Deterministiset päätösjärjestelmät** — eksplisiittiset PASS-, ESCALATE-, BLOCK-, ACCEPT-, COUNTER- ja REJECT-tulokset, jotka päätetään kielimallin ulkopuolella
+- **AI-järjestelmien arviointi ja testaus** — API-, integraatio-, regressio-, black box- ja tietoturvatestaus rajatun AI-käyttäytymisen todentamiseen
 - **Tuotantoluotettavuus ja tekoälyjärjestelmien tietoturva** — todennettava suoritus, allekirjoitetut kuitit, prompt injection -suojaus ja SSRF-suojaus
 - **Saavutettavuus arkkitehtuurissa** — WCAG 2.2 AA, semanttiset käyttöliittymät ja ruudunlukijatestaus
 
@@ -64,11 +65,18 @@ Yhdistää Playwright- ja axe-core-skannauksen jonopohjaiseen käsittelyyn ja Cl
 
 → [Repository](https://github.com/mikko-lab/a11y-lead-engine)
 
+## Avoimen lähdekoodin kontribuutiot
+
+- **[567-labs/instructor](https://github.com/567-labs/instructor)** — jäljitin kutsujan omistaman viestilistan mutaatiovirheen useisiin provider-handlereihin; PR:issä #2418 ja #2419 ehdotetut korjaukset yhdistettiin maintainerin mergattuun PR:ään #2434 alkuperäisten kontribuoijien tekijyys säilyttäen
+- **[langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/issues/8314)** — tilakanavien referenssitransparenssin juurisyyanalyysi ja 12 kommentin tekninen keskustelu
+- **[Aiven-Open/karapace](https://github.com/Aiven-Open/karapace/issues/1329)** — raportoitu RecursionError itseensä viittaavan JSON Scheman yhteensopivuustarkistuksessa sekä vian jäljitys schema registryn kirjoituspolun läpi
+
 ## Muut työt
 
 <details>
 <summary>Näytä muut projektit</summary>
 
+- **[Kopilotti WebMCP](https://github.com/mikko-lab/kopilotti-webmcp)** — avoimen lähdekoodin selainagenttihaasteen toteutus, jossa työkalut on rajattu skeemoilla, tila näkyy käyttäjälle ja hyväksyntä tehdään sivun omalla ihmisen vahvistuksella
 - **[osCommerce Checkout Refactor](https://github.com/mikko-lab/sap-checkout-refactor/tree/poc/checkout-modernization)** — tekoälyavusteinen vanhan checkout-virtauksen modernisointi; epäonnistunut testi paljasti käänteisen varastosäännön, tuloksena 34 läpäisevää testiä ja säilytetty ajonaikainen käyttäytyminen
 - **[Prompt Injection Gate](https://github.com/mikko-lab/prompt-injection-gate)** — deterministinen raja, joka eristää epäluotettavan työkaluvasteen, tuottaa PASS / ESCALATE / BLOCK -tuloksia ja tallentaa hash-ketjutetun audit-jäljen
 - **[refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess)** — riippuvuudeton Python-suojaus ALV-luokitteluun, deterministisellä eskaloinnilla ja prompt injection -regressiotesteillä
@@ -80,7 +88,7 @@ Yhdistää Playwright- ja axe-core-skannauksen jonopohjaiseen käsittelyyn ja Cl
 
 ## Teknologiat
 
-TypeScript · JavaScript · Node.js · Python · Rust · Solidity · PostgreSQL · Redis · Apache Kafka · Docker · WebAssembly · Claude API
+TypeScript · JavaScript · Node.js · Python · Rust · Solidity · PostgreSQL · Redis · Apache Kafka · Docker · WebAssembly · Claude API · LangGraph · Playwright · Vitest · GitHub Actions
 
 ## Suunnitteluperiaate
 

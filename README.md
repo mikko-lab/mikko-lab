@@ -19,6 +19,7 @@ Language models interpret and communicate, while deterministic software controls
 
 - **Agentic systems** — structured orchestration, tool use, and schema-enforced outputs
 - **Deterministic decision systems** — explicit PASS, ESCALATE, BLOCK, ACCEPT, COUNTER, and REJECT outcomes decided outside the language model
+- **AI evaluation and testing** — API, integration, regression, black-box, and security testing for bounded AI behavior
 - **Production reliability and AI systems security** — verifiable execution, signed receipts, prompt-injection protection, and SSRF protection
 - **Accessibility by architecture** — WCAG 2.2 AA, semantic interfaces, and screen-reader testing
 
@@ -64,11 +65,18 @@ It combines Playwright and axe-core scanning with queue-based processing and Cla
 
 → [Repository](https://github.com/mikko-lab/a11y-lead-engine)
 
+## Open Source Contributions
+
+- **[567-labs/instructor](https://github.com/567-labs/instructor)** — traced caller-owned message mutation across provider handlers; fixes proposed in PRs #2418 and #2419 were consolidated into merged maintainer PR #2434 with original contributor authorship preserved
+- **[langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/issues/8314)** — root-cause analysis of state-channel reference transparency, with a 12-comment technical discussion
+- **[Aiven-Open/karapace](https://github.com/Aiven-Open/karapace/issues/1329)** — reported a RecursionError on self-referential JSON Schema during compatibility checking and traced the failure through the schema-registry write path
+
 ## Additional Work
 
 <details>
 <summary>Show additional projects</summary>
 
+- **[Kopilotti WebMCP](https://github.com/mikko-lab/kopilotti-webmcp)** — an open-source browser-agent challenge build with schema-constrained tools, visible shared state, and a page-native human-approval boundary
 - **[osCommerce Checkout Refactor](https://github.com/mikko-lab/sap-checkout-refactor/tree/poc/checkout-modernization)** — AI-assisted modernization of a legacy checkout flow; a failing test exposed an inverted inventory rule, resulting in 34 passing tests with preserved runtime behaviour
 - **[Prompt Injection Gate](https://github.com/mikko-lab/prompt-injection-gate)** — a deterministic boundary that quarantines untrusted tool output, emits PASS / ESCALATE / BLOCK outcomes, and records a hash-chained audit trail
 - **[refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess)** — a zero-dependency Python guardrail for VAT classification, with deterministic escalation and prompt-injection regression tests
@@ -80,7 +88,7 @@ It combines Playwright and axe-core scanning with queue-based processing and Cla
 
 ## Technology
 
-TypeScript · JavaScript · Node.js · Python · Rust · Solidity · PostgreSQL · Redis · Apache Kafka · Docker · WebAssembly · Claude API
+TypeScript · JavaScript · Node.js · Python · Rust · Solidity · PostgreSQL · Redis · Apache Kafka · Docker · WebAssembly · Claude API · LangGraph · Playwright · Vitest · GitHub Actions
 
 ## Engineering Principle
 
