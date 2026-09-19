@@ -11,6 +11,7 @@ Kielimallit tulkitsevat ja kommunikoivat, mutta deterministinen ohjelmisto halli
 ## Aloita tästä
 
 - **[DDN Reference](https://github.com/mikko-lab/ddn-reference)** — todennettava deterministinen päätösverkko kvorumivalidoinnilla ja allekirjoitetuilla kuiteilla
+- **[ACS Guardrail Demo](https://github.com/mikko-lab/acs-guardrail-demo)** — todennetut agentin ajonaikaiset kontrollit, autentikoidut hyväksynnät, replay-suojaus, execution permitit ja hallittu tool-result-polku
 - **[Kopilotti Sales](https://app.kopilotti.online/en/)** — deterministinen käytettyjen autojen hintaneuvottelu, live-demo
 - **[Ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)** — Kafka-mittakaavan suojauskerros, kuormitustestattu 8 000 viestillä sekunnissa
 - **[Yhteydenotto](#yhteystiedot)** — avoin freelance-toimeksiannoille, etärooleille ja ohjelmistokumppanuuksille
@@ -34,6 +35,16 @@ Tämä on referenssitoteutus, ei väite aktiivisesta julkisesta tuotantokäytös
 `Rust · WebAssembly · TypeScript · Solidity · Ed25519 · Merkle trees`
 
 → [Repository](https://github.com/mikko-lab/ddn-reference)
+
+### ACS Guardrail Demo — todennetut agentin ajonaikaiset kontrollit
+
+Julkinen referenssitoteutus valituista ACS v0.1.0 -kontrollimalleista rajattuun agentin työkalusuoritukseen. Se yhdistää kanonisesti HMAC-allekirjoitetut request- ja result-rajat, replay-suojauksen, kryptografisesti todennetut ihmishyväksynnät, kertakäyttöiset execution permitit, session/request/tool-korrelaation ja suorituksen jälkeisen output governance -portin.
+
+v0.1.0-julkaisu käytiin defensive review -kierroksen läpi: kaikki löydetyt High-, Medium- ja Low-tason havainnot käsiteltiin ja regressiotestattiin. Julkaisu sisältää 174 läpäisevää testiä sekä mutation-todisteet keskeisille runtime-kontrolleille. Toteutus demonstroi valittuja ACS-malleja eikä väitä ACS-Core-conformanssia.
+
+`TypeScript · Node.js · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
+
+→ [Repository](https://github.com/mikko-lab/acs-guardrail-demo)
 
 ### Kopilotti Sales — deterministinen käytettyjen autojen hintaneuvottelu
 
