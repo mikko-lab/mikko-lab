@@ -11,6 +11,7 @@ Language models interpret and communicate, while deterministic software controls
 ## Start Here
 
 - **[DDN Reference](https://github.com/mikko-lab/ddn-reference)** — a verifiable deterministic decision network with quorum validation and signed receipts
+- **[ACS Guardrail Demo](https://github.com/mikko-lab/acs-guardrail-demo)** — evidence-backed agent runtime controls with authenticated approvals, replay protection, execution permits, and governed tool results
 - **[Kopilotti Sales](https://app.kopilotti.online/en/)** — deterministic used-car price negotiation, live demo
 - **[Ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)** — a Kafka-scale guardrail layer, load-tested at 8,000 messages per second
 - **[Contact](#contact)** — open to freelance work, remote roles, and software partnerships
@@ -34,6 +35,16 @@ This is a reference implementation, not a claim of an active public production d
 `Rust · WebAssembly · TypeScript · Solidity · Ed25519 · Merkle trees`
 
 → [Repository](https://github.com/mikko-lab/ddn-reference)
+
+### ACS Guardrail Demo — Evidence-Backed Agent Runtime Controls
+
+A public reference implementation of selected ACS v0.1.0 control patterns for bounded agent tool execution. It combines canonical HMAC-signed request and result boundaries, replay protection, authenticated human approval grants, single-use execution permits, session/request/tool result correlation, and post-execution output governance.
+
+The v0.1.0 release completed a defensive review in which all identified High, Medium, and Low findings were addressed and regression-tested. The release includes 174 passing tests plus mutation evidence for key runtime controls. It demonstrates selected ACS patterns and does not claim ACS-Core conformance.
+
+`TypeScript · Node.js · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
+
+→ [Repository](https://github.com/mikko-lab/acs-guardrail-demo)
 
 ### Kopilotti Sales — Deterministic Used-Car Price Negotiation
 
