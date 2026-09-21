@@ -38,11 +38,13 @@ This is a reference implementation, not a claim of an active public production d
 
 ### ACS Guardrail Demo — Evidence-Backed Agent Runtime Controls
 
-A public reference implementation of selected ACS v0.1.0 control patterns for bounded agent tool execution. It combines canonical HMAC-signed request and result boundaries, replay protection, authenticated human approval grants, single-use execution permits, session/request/tool result correlation, and post-execution output governance.
+A public reference implementation for bounded agent tool execution using a deterministic control boundary around AI-proposed actions. It combines ALLOW/DENY/ASK runtime decisions, replay protection, authenticated human approval flows, session-bound execution correlation, result gating, and fail-closed audit evidence.
 
-The v0.1.0 release completed a defensive review in which all identified High, Medium, and Low findings were addressed and regression-tested. The release includes 174 passing tests plus mutation evidence for key runtime controls. It demonstrates selected ACS patterns and does not claim ACS-Core conformance.
+The current v0.2.1 release adds post-hoc oversight metrics and a conformance-oriented evaluation layer covering replay, approval isolation, correlation attacks, cross-session state boundaries, result governance, and adversarial state-machine sequences. The repository currently passes **266 automated tests across 17 Jest suites** with a clean TypeScript typecheck.
 
-`TypeScript · Node.js · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
+The project implements a scoped subset of ACS v0.1.0 patterns and deliberately does **not** claim full ACS conformance, universal mediation, production-grade audit persistence, or cryptographic tool binding in `ApprovalGrantV1`.
+
+`TypeScript · Node.js · Agent Security · AI Evaluation · Runtime Controls · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
 
 → [Repository](https://github.com/mikko-lab/acs-guardrail-demo)
 
