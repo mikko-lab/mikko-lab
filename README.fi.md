@@ -12,6 +12,7 @@ Kielimallit tulkitsevat ja kommunikoivat, mutta deterministinen ohjelmisto halli
 
 - **[DDN Reference](https://github.com/mikko-lab/ddn-reference)** — todennettava deterministinen päätösverkko kvorumivalidoinnilla ja allekirjoitetuilla kuiteilla
 - **[ACS Guardrail Demo](https://github.com/mikko-lab/acs-guardrail-demo)** — todennetut agentin ajonaikaiset kontrollit, autentikoidut hyväksynnät, replay-suojaus, execution permitit ja hallittu tool-result-polku
+- **[Execution Evidence Demo](https://github.com/mikko-lab/execution-evidence-demo)** — allekirjoitetut kuitit siitä, mitä todella suoritettiin ja miten havaittu tila muuttui
 - **[Kopilotti Sales](https://app.kopilotti.online/en/)** — deterministinen käytettyjen autojen hintaneuvottelu, live-demo
 - **[Ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)** — Kafka-mittakaavan suojauskerros, kuormitustestattu 8 000 viestillä sekunnissa
 - **[Yhteydenotto](#yhteystiedot)** — avoin freelance-toimeksiannoille, etärooleille ja ohjelmistokumppanuuksille
@@ -38,13 +39,25 @@ Tämä on referenssitoteutus, ei väite aktiivisesta julkisesta tuotantokäytös
 
 ### ACS Guardrail Demo — todennetut agentin ajonaikaiset kontrollit
 
-Julkinen referenssitoteutus valituista ACS v0.1.0 -kontrollimalleista rajattuun agentin työkalusuoritukseen. Se yhdistää kanonisesti HMAC-allekirjoitetut request- ja result-rajat, replay-suojauksen, kryptografisesti todennetut ihmishyväksynnät, kertakäyttöiset execution permitit, session/request/tool-korrelaation ja suorituksen jälkeisen output governance -portin.
+Julkinen referenssitoteutus rajattuun agentin työkalusuoritukseen, jossa deterministinen kontrolliraja ympäröi tekoälyn ehdottamat toimenpiteet. Se yhdistää ALLOW/DENY/ASK-ajonaikaiset päätökset, replay-suojauksen, allekirjoitetut capability-oikeudet (rajattu agenttiin, sessioon, tarkkoihin työkaluihin ja voimassaoloaikaan), työkaluun sidotut ihmishyväksynnät, execution permitit, sessioon sidotun tuloskorrelaation, result-gating-portin ja fail-closed-periaatteella toimivan audit-evidencen.
 
-v0.1.0-julkaisu käytiin defensive review -kierroksen läpi: kaikki löydetyt High-, Medium- ja Low-tason havainnot käsiteltiin ja regressiotestattiin. Julkaisu sisältää 174 läpäisevää testiä sekä mutation-todisteet keskeisille runtime-kontrolleille. Toteutus demonstroi valittuja ACS-malleja eikä väitä ACS-Core-conformanssia.
+Nykyinen v0.4.0-julkaisu lisää peukaloinnin paljastavan SHA-256-audit-ketjun, trusted head -todennuksen sekä todennetun audit-evidencen viennin OCSF 1.8.0 -muotoon; edustava 19 tapahtuman vientikorpus ristiinvalidoitiin virallisella OCSF Toolkitilla ilman virheitä tai varoituksia. Repositorio läpäisee tällä hetkellä **479 automaattista testiä 26 Jest-suitessa** puhtaalla TypeScript-tyyppitarkistuksella, ja ajo varmennetaan GitHub Actionsissa Node 22:lla ja 24:llä.
 
-`TypeScript · Node.js · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
+Projekti toteuttaa rajatun osajoukon ACS v0.1.0 -malleista eikä tarkoituksella väitä täyttä ACS-conformanssia, universaalia mediaatiota eikä täyttä OCSF-validointia. Audit-evidence säilyy muistissa: muuttumatonta tallennusta, ulkoista ankkurointia tai SIEM-integraatiota ei ole.
+
+`TypeScript · Node.js · Agent Security · AI Evaluation · Runtime Controls · ACS v0.1.0 · OCSF 1.8.0 · HMAC-SHA256 · Ed25519 · SHA-256 · AJV · JCS · Jest`
 
 → [Repository](https://github.com/mikko-lab/acs-guardrail-demo)
+
+### Execution Evidence Demo — todennettavat suoritushavainnot
+
+Pieni Node.js/TypeScript-kirjasto ketjun viimeiselle kerrokselle: päätösevidence → ajonaikainen valtuutus → suoritusevidence. Se vastaa yhteen rajattuun kysymykseen — mitä todella suoritettiin, kenen toimesta ja miten havaittu tila muuttui — Ed25519-allekirjoitetuilla suorituskuiteilla deterministisistä tilatiivisteistä. v0.2.0-julkaisu lisää append-only-periaatteella linkitetyt elinkaarihavainnot muuttumattomien v0.1-kuittien rinnalle.
+
+Todennus osoittaa, että konfiguroitu allekirjoittaja allekirjoitti evidencen, ei sitä, että taustalla olevat tapahtumat todella tapahtuivat. Allekirjoitukset eivät estä replayta, eikä kirjastossa ole pysyvää tallennusta, avainten kierrätystä tai mitätöintiä.
+
+`TypeScript · Node.js · Ed25519 · SHA-256 · JCS · Jest`
+
+→ [Repository](https://github.com/mikko-lab/execution-evidence-demo)
 
 ### Kopilotti Sales — deterministinen käytettyjen autojen hintaneuvottelu
 

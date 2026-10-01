@@ -12,6 +12,7 @@ Language models interpret and communicate, while deterministic software controls
 
 - **[DDN Reference](https://github.com/mikko-lab/ddn-reference)** — a verifiable deterministic decision network with quorum validation and signed receipts
 - **[ACS Guardrail Demo](https://github.com/mikko-lab/acs-guardrail-demo)** — evidence-backed agent runtime controls with authenticated approvals, replay protection, execution permits, and governed tool results
+- **[Execution Evidence Demo](https://github.com/mikko-lab/execution-evidence-demo)** — signed receipts for what actually executed and how observed state changed
 - **[Kopilotti Sales](https://app.kopilotti.online/en/)** — deterministic used-car price negotiation, live demo
 - **[Ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)** — a Kafka-scale guardrail layer, load-tested at 8,000 messages per second
 - **[Contact](#contact)** — open to freelance work, remote roles, and software partnerships
@@ -38,15 +39,25 @@ This is a reference implementation, not a claim of an active public production d
 
 ### ACS Guardrail Demo — Evidence-Backed Agent Runtime Controls
 
-A public reference implementation for bounded agent tool execution using a deterministic control boundary around AI-proposed actions. It combines ALLOW/DENY/ASK runtime decisions, replay protection, authenticated human approval flows, session-bound execution correlation, result gating, and fail-closed audit evidence.
+A public reference implementation for bounded agent tool execution using a deterministic control boundary around AI-proposed actions. It combines ALLOW/DENY/ASK runtime decisions, replay protection, signed capability grants scoped to agent, session, exact tools and a validity window, tool-bound human approvals, execution permits, session-bound result correlation, result gating, and fail-closed audit evidence.
 
-The current v0.2.1 release adds post-hoc oversight metrics and a conformance-oriented evaluation layer covering replay, approval isolation, correlation attacks, cross-session state boundaries, result governance, and adversarial state-machine sequences. The repository currently passes **266 automated tests across 17 Jest suites** with a clean TypeScript typecheck.
+The current v0.4.0 release adds a tamper-evident SHA-256 audit chain with trusted-head verification and an OCSF 1.8.0 export of verified audit evidence; a representative corpus of 19 exported events cross-validated against the official OCSF Toolkit with 0 errors and 0 warnings. The repository currently passes **479 automated tests across 26 Jest suites** with a clean TypeScript typecheck, verified in GitHub Actions on Node 22 and 24.
 
-The project implements a scoped subset of ACS v0.1.0 patterns and deliberately does **not** claim full ACS conformance, universal mediation, production-grade audit persistence, or cryptographic tool binding in `ApprovalGrantV1`.
+The project implements a scoped subset of ACS v0.1.0 patterns and deliberately does **not** claim full ACS conformance, universal mediation, or full OCSF validation. Audit evidence stays in memory: there is no immutable storage, external anchoring, or SIEM integration.
 
-`TypeScript · Node.js · Agent Security · AI Evaluation · Runtime Controls · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
+`TypeScript · Node.js · Agent Security · AI Evaluation · Runtime Controls · ACS v0.1.0 · OCSF 1.8.0 · HMAC-SHA256 · Ed25519 · SHA-256 · AJV · JCS · Jest`
 
 → [Repository](https://github.com/mikko-lab/acs-guardrail-demo)
+
+### Execution Evidence Demo — Verifiable Execution Observations
+
+A small Node.js/TypeScript library for the last layer of the chain: decision evidence → runtime authority → execution evidence. It answers one narrow question — what was actually executed, by whom, and how the observed state changed — with Ed25519-signed execution receipts over deterministic state hashes. The v0.2.0 release adds append-only, linked lifecycle observations alongside the unchanged v0.1 receipts.
+
+Verification proves that the configured signing authority signed the evidence, not that the underlying events happened. Signatures do not prevent replay, and there is no persistence, key rotation, or revocation.
+
+`TypeScript · Node.js · Ed25519 · SHA-256 · JCS · Jest`
+
+→ [Repository](https://github.com/mikko-lab/execution-evidence-demo)
 
 ### Kopilotti Sales — Deterministic Used-Car Price Negotiation
 
