@@ -2,113 +2,115 @@
 
 # Mikko Tarkiainen
 
-**AI Systems Engineer** · Deterministic decision systems · Production reliability
+**AI Systems Engineer · Agent Runtime Controls, Evaluation & Reliability · Deterministic Decision Systems**
 
-Based in Finland · Open to freelance work, remote roles, and software partnerships
+Based in Finland · Open to freelance work, remote roles and software partnerships
 
-Language models interpret and communicate, while deterministic software controls decisions, permissions, and escalation. Systems and reference implementations are built to be testable and auditable, with their operating boundaries clearly documented.
+I design and build AI systems with explicit operating boundaries. Language models interpret, discuss and propose; software enforces permissions, business rules and state transitions.
 
-## Start Here
+Two decades as an automotive entrepreneur shaped my approach: own the problem, make decisions under uncertainty and remain accountable for the outcome.
 
-- **[DDN Reference](https://github.com/mikko-lab/ddn-reference)** — a verifiable deterministic decision network with quorum validation and signed receipts
-- **[ACS Guardrail Demo](https://github.com/mikko-lab/acs-guardrail-demo)** — evidence-backed agent runtime controls with authenticated approvals, replay protection, execution permits, and governed tool results
-- **[Kopilotti Sales](https://app.kopilotti.online/en/)** — deterministic used-car price negotiation, live demo
-- **[Ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)** — a Kafka-scale guardrail layer, load-tested at 8,000 messages per second
-- **[Contact](#contact)** — open to freelance work, remote roles, and software partnerships
+My current work focuses on three separate questions:
 
-## Current Focus
+- **Control:** What is an agent allowed to do?
+- **Evaluation:** Do the implemented controls behave as specified under adversarial scenarios?
+- **Evidence:** What can signed observations establish about execution, and what remains uncertain?
 
-- **Agentic systems** — structured orchestration, tool use, and schema-enforced outputs
-- **Deterministic decision systems** — explicit PASS, ESCALATE, BLOCK, ACCEPT, COUNTER, and REJECT outcomes decided outside the language model
-- **AI evaluation and testing** — API, integration, regression, black-box, and security testing for bounded AI behavior
-- **Production reliability and AI systems security** — verifiable execution, signed receipts, prompt-injection protection, and SSRF protection
-- **Accessibility by architecture** — WCAG 2.2 AA, semantic interfaces, and screen-reader testing
+## Start here: control, evaluation and evidence
 
-## Selected Work
+These three public reference implementations address different responsibilities. Their relationship and trust boundaries are described in [Control, Evaluation & Evidence Architecture](https://github.com/mikko-lab/agent-control-evals/blob/9a624cf0d9972dea65e37713729a455b2d365f51/docs/architecture/control-evaluation-evidence.md).
 
-### DDN Reference — Verifiable Deterministic Decision Network
+### ACS Guardrail Demo — Runtime Authority & Agent Security
 
-An open-source reference implementation for independently verifiable automated decisions. Versioned business rules execute inside three isolated validator processes, each running the same WebAssembly policy package; a decision is accepted only with a 2-of-3 quorum. Accepted decisions receive cryptographically signed receipts that can be independently checked, batched into a Merkle tree, and anchored to an EVM-compatible smart contract.
+Deterministic runtime controls for agent tool execution: signed and scoped capabilities, tool-bound human approval, tenant and ancestor-chain revocation, and an optional approval–permit lifecycle with single-use permits.
 
-This is a reference implementation, not a claim of an active public production deployment.
+The runtime takes an immutable request snapshot so that the request executed is the request verified. Cooperative cancellation, commit fences and output gating constrain the managed execution path. Hash-chained audit records support integrity checks against a separately trusted head.
 
-`Rust · WebAssembly · TypeScript · Solidity · Ed25519 · Merkle trees`
+**Boundary:** cancellation requires tool cooperation, and effects outside the managed commit boundary are not prevented. Revocation state is local and in memory. This is a reference implementation, not a claim of full ACS conformance or production readiness.
 
-→ [Repository](https://github.com/mikko-lab/ddn-reference)
+[Repository](https://github.com/mikko-lab/acs-guardrail-demo)
 
-### ACS Guardrail Demo — Evidence-Backed Agent Runtime Controls
+### Agent Control Evals — Deterministic Evaluation of Agent Controls
 
-A public reference implementation for bounded agent tool execution using a deterministic control boundary around AI-proposed actions. It combines ALLOW/DENY/ASK runtime decisions, replay protection, authenticated human approval flows, session-bound execution correlation, result gating, and fail-closed audit evidence.
+Reproducible evaluation harnesses using explicit specifications, deterministic oracles, adversarial scenarios and mutation testing.
 
-The current v0.2.1 release adds post-hoc oversight metrics and a conformance-oriented evaluation layer covering replay, approval isolation, correlation attacks, cross-session state boundaries, result governance, and adversarial state-machine sequences. The repository currently passes **266 automated tests across 17 Jest suites** with a clean TypeScript typecheck.
+The work separates reported policy decisions from observed effects. Evaluations identify the tested system version, corpus, declared capability profile and coverage gaps. Runtime-control, revocation and automotive-agent evaluations retain their own assumptions and reporting boundaries.
 
-The project implements a scoped subset of ACS v0.1.0 patterns and deliberately does **not** claim full ACS conformance, universal mediation, production-grade audit persistence, or cryptographic tool binding in `ApprovalGrantV1`.
+**Boundary:** results apply to the evaluated versions, scenarios and observation mechanisms. Synthetic harness validation is distinguished from evaluation of an external system. Passing a declared profile does not establish full-contract conformance, universal safety or production readiness.
 
-`TypeScript · Node.js · Agent Security · AI Evaluation · Runtime Controls · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
+[Repository](https://github.com/mikko-lab/agent-control-evals)
 
-→ [Repository](https://github.com/mikko-lab/acs-guardrail-demo)
+### Execution Evidence Demo — Verifiable Execution Receipts & History
 
-### Kopilotti Sales — Deterministic Used-Car Price Negotiation
+A TypeScript reference library for Ed25519-signed execution receipts and linked lifecycle observations. Receipts bind an actor and action to hashes of supplied before-state, after-state and result observations.
 
-A customer-facing digital sales channel for used-vehicle price negotiation. The language model handles the conversation, but it never determines the price — dealer-defined business rules control acceptance, counteroffers, rejection, and escalation, while the backend separately enforces vehicle reservation, tenant and customer ownership, contract progression, and payment-state permissions.
+Lifecycle evidence links operations, attempts and receipts while preserving uncertainty and conflicting outcomes. Signature verification, history assessment and authorization of the next action remain separate responsibilities.
 
-After an accepted price, the reference implementation can demonstrate a concept contract and payment-status tracking. Customers cannot confirm payments, and Kopilotti does not receive, hold, or transfer funds. The public demo contains no payable bank details, and the full invoice-to-PAID flow is not active in public production traffic; the DDN integration boundary exists but is not active there.
+**Boundary:** signatures authenticate evidence under configured trust rules; they do not independently prove external events. The library does not execute operations, authorize retries or guarantee complete history, immutable storage or exactly-once execution.
 
-`Node.js · Express · PostgreSQL · JavaScript · Claude API · Playwright`
+[Repository](https://github.com/mikko-lab/execution-evidence-demo)
 
-→ [Repository](https://github.com/mikko-lab/kopilotti-sales-demo) · [Live demo](https://app.kopilotti.online/en/)
+## Applied systems
 
-### Ruuhkavahti — Kafka-Scale Guardrails Under Load
+### Kopilotti Sales — Dealer-Controlled Digital Sales
 
-A deterministic PASS / ESCALATE / BLOCK layer running inside a scalable Kafka consumer group; load-tested against a simulated live-TV traffic spike of 8,000 messages per second.
+AI-assisted used-car sales within dealer-defined commercial boundaries. The language model handles conversation; deterministic server-side rules control pricing decisions and sales-flow transitions.
 
-The dashboard makes real consumer lag, duplicate handling, and Kafka consumer-group rebalances visible through a 3D visualization, a reduced-motion 2D view, a semantic HTML table, and accessible live status updates.
+A vehicle-specific Magic Link provides the customer entry point, while the dealer configures commercial rules in Admin. A separate Evaluation & Safety harness tests observable API behaviour against a local Sales system in an isolated environment.
 
-`Python · TypeScript · Apache Kafka · Docker Compose · axe-core`
+**Boundary:** the system remains in development. External integrations and pilot readiness are assessed separately. Kopilotti does not receive, hold or transfer customer payments.
 
-→ [Repository](https://github.com/mikko-lab/ruuhkavahti)
+[Project](https://github.com/mikko-lab/kopilotti-sales-demo) · [Live demo](https://app.kopilotti.online/en/)
 
-### A11Y Lead Engine — Automated Accessibility Audit Pipeline
+### DDN Reference — Verifiable Deterministic Decisions
 
-A TypeScript-based accessibility audit pipeline that discovers Finnish business websites, runs WCAG audits, enriches results with business-registry data, and creates structured outreach material.
+Versioned business rules execute as WebAssembly in three isolated validator processes on one host under one operator. A decision is accepted when at least two configured validators produce matching signed attestations.
 
-It combines Playwright and axe-core scanning with queue-based processing and Claude-assisted summaries; the infrastructure includes Redis authentication, API middleware, SSRF and DNS-rebinding protection, automated tests, and GitHub Actions CI.
+Decision receipts support verification of signatures, request bindings, hashes and Merkle proofs. The implementation also demonstrates EVM anchoring on a local Anvil chain.
 
-`TypeScript · Node.js · Playwright · axe-core · Redis · BullMQ · Claude API`
+**Boundary:** this is not an independent validator network or an active production integration. Receipt verification does not normally rerun the policy or establish whether the business rule itself is correct or fair.
 
-→ [Repository](https://github.com/mikko-lab/a11y-lead-engine)
+[Repository](https://github.com/mikko-lab/ddn-reference)
 
-## Open Source Contributions
+### Ruuhkavahti — Kafka Guardrails Under Load
 
-- **[567-labs/instructor](https://github.com/567-labs/instructor)** — traced caller-owned message mutation across provider handlers; fixes proposed in PRs #2418 and #2419 were consolidated into merged maintainer PR #2434 with original contributor authorship preserved
-- **[langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/issues/8314)** — root-cause analysis of state-channel reference transparency, with a 12-comment technical discussion
-- **[Aiven-Open/karapace](https://github.com/Aiven-Open/karapace/issues/1329)** — reported a RecursionError on self-referential JSON Schema during compatibility checking and traced the failure through the schema-registry write path
+A deterministic PASS / ESCALATE / BLOCK pipeline, locally tested with a simulated 8,000-message-per-second traffic spike.
 
-## Additional Work
+The implementation combines consumer-lag observability, duplicate handling, an independent consumer service, signed service-to-service authentication and distributed tracing. The dashboard includes accessible semantic views and reduced-motion support.
 
-<details>
-<summary>Show additional projects</summary>
+**Boundary:** the published measurements describe specific local experiments, not a production throughput or availability guarantee.
 
-- **[Kopilotti WebMCP](https://github.com/mikko-lab/kopilotti-webmcp)** — an open-source browser-agent challenge build with schema-constrained tools, visible shared state, and a page-native human-approval boundary
-- **[osCommerce Checkout Refactor](https://github.com/mikko-lab/sap-checkout-refactor/tree/poc/checkout-modernization)** — AI-assisted modernization of a legacy checkout flow; a failing test exposed an inverted inventory rule, resulting in 34 passing tests with preserved runtime behaviour
-- **[Prompt Injection Gate](https://github.com/mikko-lab/prompt-injection-gate)** — a deterministic boundary that quarantines untrusted tool output, emits PASS / ESCALATE / BLOCK outcomes, and records a hash-chained audit trail
-- **[refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess)** — a zero-dependency Python guardrail for VAT classification, with deterministic escalation and prompt-injection regression tests
-- **[claude-code-invoice-guard](https://github.com/mikko-lab/claude-code-invoice-guard)** — the same guardrail principle implemented with Claude Code runtime primitives
-- **[Provenanssi](https://github.com/mikko-lab/provenanssi)** — open research separating measured image information from model-generated reconstruction
-- **[Karikko](https://github.com/mikko-lab/karikko)** — offline-first geospatial hazard reporting for Finnish waters, with a [backend](https://github.com/mikko-lab/karikko-api) and [live demo](https://demo.nordicmarinedata.com)
+[Repository](https://github.com/mikko-lab/ruuhkavahti)
 
-</details>
+## Additional work
 
-## Technology
+- [A11Y Lead Engine](https://github.com/mikko-lab/a11y-lead-engine) — automated accessibility checks, company-data enrichment and structured outreach workflows.
+- [Prompt Injection Gate](https://github.com/mikko-lab/prompt-injection-gate) — a proof of concept separating structural tool-output quarantine from best-effort pattern detection.
+- [refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess) — deterministic VAT classification and escalation, with prompt-injection regression tests.
+- [claude-code-invoice-guard](https://github.com/mikko-lab/claude-code-invoice-guard) — the same guardrail principle implemented with Claude Code runtime primitives.
+- [Kopilotti WebMCP](https://github.com/mikko-lab/kopilotti-webmcp) — a browser-agent demonstration with constrained tools, visible state and a human-approval boundary.
+- [osCommerce Checkout Refactor](https://github.com/mikko-lab/sap-checkout-refactor/tree/poc/checkout-modernization) — AI-assisted legacy refactoring with explicit business-rule analysis and behaviour-preserving tests.
+- [Provenanssi](https://github.com/mikko-lab/provenanssi) — open research separating measured image information from model-generated reconstruction.
+- [Karikko](https://github.com/mikko-lab/karikko) — geospatial hazard reporting for Finnish waters, with a separate [backend](https://github.com/mikko-lab/karikko-api).
 
-TypeScript · JavaScript · Node.js · Python · Rust · Solidity · PostgreSQL · Redis · Apache Kafka · Docker · WebAssembly · Claude API · LangGraph · Playwright · Vitest · GitHub Actions
+## Open-source contributions
 
-## Engineering Principle
+- [567-labs/instructor](https://github.com/567-labs/instructor/pull/2434) — traced caller-owned message mutation across providers; proposed fixes were consolidated into a merged maintainer PR with original contributor authorship preserved.
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/issues/8314) — root-cause analysis of state-channel reference transparency.
+- [Aiven-Open/karapace](https://github.com/Aiven-Open/karapace/issues/1329) — reported and traced a RecursionError involving self-referential JSON Schema compatibility checking.
 
-LLM applications become reliable when probabilistic reasoning is separated from authoritative decision-making. I use language models where interpretation, synthesis, and interaction are valuable; deterministic software remains responsible whenever correctness, permissions, money, security, or user safety are involved. This boundary is designed into the architecture from the beginning — not added after the model reaches production.
+## Technologies
+
+TypeScript · JavaScript · Node.js · Python · Rust · PostgreSQL · Redis · Kafka · Docker · WebAssembly · Solidity · Playwright · Jest · Vitest · GitHub Actions
+
+## Engineering principle
+
+**Flag, don’t hide.**
+
+A system should state what it decided, what it observed, what its evidence can verify and where its limits are. Permission to act, evaluation results and evidence of execution should never be treated as interchangeable.
 
 ## Contact
 
-Open to software partnerships, architecture consulting, selected freelance projects, and remote roles.
+Open to software partnerships, architecture consulting, selected freelance projects and remote roles.
 
-**[Get in touch →](mailto:hello@kopilotti.online?subject=Software%20partnership%20inquiry)**
+[Get in touch →](mailto:hello@kopilotti.online?subject=Software%20partnership%20inquiry)
