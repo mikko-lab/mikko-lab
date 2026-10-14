@@ -2,111 +2,115 @@
 
 # Mikko Tarkiainen
 
-**AI-järjestelmäinsinööri** · Deterministiset päätösjärjestelmät · Tuotantoluotettavuus
+**AI-järjestelmäinsinööri · Agenttien ajonaikaiset kontrollit, arviointi ja luotettavuus · Deterministiset päätösjärjestelmät**
 
 Suomessa · Avoin freelance-toimeksiannoille, etärooleille ja ohjelmistokumppanuuksille
 
-Kielimallit tulkitsevat ja kommunikoivat, mutta deterministinen ohjelmisto hallitsee päätöksiä, käyttöoikeuksia ja eskalointia. Järjestelmät ja referenssitoteutukset rakennetaan testattaviksi ja auditoitaviksi, ja niiden toimintarajat kuvataan selkeästi.
+Suunnittelen ja rakennan tekoälyjärjestelmiä, joilla on selkeät toimintarajat. Kielimallit tulkitsevat, keskustelevat ja ehdottavat; ohjelmisto valvoo käyttöoikeuksia, liiketoimintasääntöjä ja tilasiirtymiä.
 
-## Aloita tästä
+Kaksi vuosikymmentä yrittäjänä autoalalla muovasi työtapani: ota vastuu ongelmasta, tee päätöksiä epävarmuudessa ja vastaa lopputuloksesta.
 
-- **[DDN Reference](https://github.com/mikko-lab/ddn-reference)** — todennettava deterministinen päätösverkko kvorumivalidoinnilla ja allekirjoitetuilla kuiteilla
-- **[ACS Guardrail Demo](https://github.com/mikko-lab/acs-guardrail-demo)** — todennetut agentin ajonaikaiset kontrollit, autentikoidut hyväksynnät, replay-suojaus, execution permitit ja hallittu tool-result-polku
-- **[Kopilotti Sales](https://app.kopilotti.online/en/)** — deterministinen käytettyjen autojen hintaneuvottelu, live-demo
-- **[Ruuhkavahti](https://github.com/mikko-lab/ruuhkavahti)** — Kafka-mittakaavan suojauskerros, kuormitustestattu 8 000 viestillä sekunnissa
-- **[Yhteydenotto](#yhteystiedot)** — avoin freelance-toimeksiannoille, etärooleille ja ohjelmistokumppanuuksille
+Nykyinen työni keskittyy kolmeen erilliseen kysymykseen:
 
-## Nykyinen painopiste
+- **Kontrollit:** Mitä agentti saa tehdä?
+- **Arviointi:** Toimivatko toteutetut kontrollit määrittelyn mukaisesti myös niiden rajoja koettelevissa tilanteissa?
+- **Näyttö:** Mitä allekirjoitetut havainnot voivat todentaa suorituksesta ja mikä jää epävarmaksi?
 
-- **Agenttijärjestelmät** — jäsennelty orkestrointi, työkalujen käyttö ja skeemalla validoidut vastaukset
-- **Deterministiset päätösjärjestelmät** — eksplisiittiset PASS-, ESCALATE-, BLOCK-, ACCEPT-, COUNTER- ja REJECT-tulokset, jotka päätetään kielimallin ulkopuolella
-- **AI-järjestelmien arviointi ja testaus** — API-, integraatio-, regressio-, black box- ja tietoturvatestaus rajatun AI-käyttäytymisen todentamiseen
-- **Tuotantoluotettavuus ja tekoälyjärjestelmien tietoturva** — todennettava suoritus, allekirjoitetut kuitit, prompt injection -suojaus ja SSRF-suojaus
-- **Saavutettavuus arkkitehtuurissa** — WCAG 2.2 AA, semanttiset käyttöliittymät ja ruudunlukijatestaus
+## Aloita tästä: kontrollit, arviointi ja näyttö
 
-## Valitut työt
+Nämä kolme julkista referenssitoteutusta käsittelevät eri vastuita. Niiden suhteet ja luottamusrajat kuvataan yhteisessä dokumentissa: [Control, Evaluation & Evidence Architecture](https://github.com/mikko-lab/agent-control-evals/blob/9a624cf0d9972dea65e37713729a455b2d365f51/docs/architecture/control-evaluation-evidence.md).
 
-### DDN Reference — todennettava deterministinen päätösverkko
+### ACS Guardrail Demo — Agenttien toimivalta ja ajonaikaiset kontrollit
 
-Avoimen lähdekoodin referenssitoteutus itsenäisesti todennettaville automatisoiduille päätöksille. Versioidut liiketoimintasäännöt suoritetaan kolmessa eristetyssä validaattoriprosessissa, jotka ajavat samaa WebAssembly-käytäntöpakettia; päätös hyväksytään vain 2/3-kvorumilla. Hyväksytyt päätökset saavat kryptografisesti allekirjoitetut kuitit, jotka voidaan tarkistaa itsenäisesti, koota Merkle-puuhun ja ankkuroida EVM-yhteensopivaan älysopimukseen.
+Deterministisiä kontrolleja agenttien työkalukutsuille: allekirjoitetut ja rajatut toimintavaltuudet, työkalukohtainen ihmisen hyväksyntä, tenant- ja valtuusketjukohtainen valtuuksien peruminen sekä valinnainen hyväksynnän ja kertakäyttöisen suoritusluvan elinkaari.
 
-Tämä on referenssitoteutus, ei väite aktiivisesta julkisesta tuotantokäytöstä.
+Ajonaikainen järjestelmä ottaa pyynnöstä muuttumattoman kopion, jotta suoritettava pyyntö vastaa tarkistettua pyyntöä. Yhteistyöhön perustuva keskeyttäminen, tilamuutosten toteutusta rajaavat tarkistukset ja tulosten luovutusrajat rajoittavat hallittua suorituspolkua. Hash-ketjutetun audit-jäljen eheys voidaan tarkistaa erikseen luotettua ketjun päätiivistettä vasten.
 
-`Rust · WebAssembly · TypeScript · Solidity · Ed25519 · Merkle trees`
+**Rajaus:** keskeyttäminen edellyttää työkalun yhteistyötä, eikä hallitun tilamuutosrajan ulkopuolisia vaikutuksia estetä. Valtuuksien perumisen tila on paikallinen ja muistissa. Kyseessä on referenssitoteutus, ei väite täydestä ACS-vaatimustenmukaisuudesta tai tuotantovalmiudesta.
 
-→ [Repository](https://github.com/mikko-lab/ddn-reference)
+[Lähdekoodi](https://github.com/mikko-lab/acs-guardrail-demo)
 
-### ACS Guardrail Demo — todennetut agentin ajonaikaiset kontrollit
+### Agent Control Evals — Agenttikontrollien deterministinen arviointi
 
-Julkinen referenssitoteutus valituista ACS v0.1.0 -kontrollimalleista rajattuun agentin työkalusuoritukseen. Se yhdistää kanonisesti HMAC-allekirjoitetut request- ja result-rajat, replay-suojauksen, kryptografisesti todennetut ihmishyväksynnät, kertakäyttöiset execution permitit, session/request/tool-korrelaation ja suorituksen jälkeisen output governance -portin.
+Toistettavia arviointijärjestelmiä, jotka perustuvat täsmällisiin määrittelyihin, deterministisiin odotettuihin tuloksiin, rajoja koetteleviin skenaarioihin ja mutaatiotestaukseen.
 
-v0.1.0-julkaisu käytiin defensive review -kierroksen läpi: kaikki löydetyt High-, Medium- ja Low-tason havainnot käsiteltiin ja regressiotestattiin. Julkaisu sisältää 174 läpäisevää testiä sekä mutation-todisteet keskeisille runtime-kontrolleille. Toteutus demonstroi valittuja ACS-malleja eikä väitä ACS-Core-conformanssia.
+Työ erottaa ilmoitetut sääntöpäätökset havaituista vaikutuksista. Arvioinneissa yksilöidään testattu järjestelmäversio, testiaineisto, ilmoitettu kyvykkyysprofiili ja kattavuusaukot. Ajonaikaisten kontrollien, valtuuksien perumisen ja autoalan agenttien arvioinneilla on omat oletuksensa ja raportointirajansa.
 
-`TypeScript · Node.js · ACS v0.1.0 · HMAC-SHA256 · Ed25519 · AJV · JCS · Jest`
+**Rajaus:** tulokset koskevat arvioituja versioita, skenaarioita ja havaintomekanismeja. Synteettinen arviointijärjestelmän testaus erotetaan ulkoisen järjestelmän arvioinnista. Rajatun profiilin läpäisy ei osoita koko arviointisopimuksen täyttymistä, yleistä turvallisuutta tai tuotantovalmiutta.
 
-→ [Repository](https://github.com/mikko-lab/acs-guardrail-demo)
+[Lähdekoodi](https://github.com/mikko-lab/agent-control-evals)
 
-### Kopilotti Sales — deterministinen käytettyjen autojen hintaneuvottelu
+### Execution Evidence Demo — Varmennettavat suorituskuitit ja historia
 
-Asiakasrajapintainen myyntikanava käytettyjen ajoneuvojen hintaneuvotteluun. Kielimalli hoitaa keskustelun, mutta ei koskaan päätä hintaa — jälleenmyyjän määrittämät liiketoimintasäännöt ohjaavat hyväksynnän, vastatarjoukset, hylkäyksen ja eskaloinnin, ja taustajärjestelmä valvoo erikseen ajoneuvon varausta, organisaatio- ja asiakaskohtaista omistajuutta, sopimuksen etenemistä sekä maksutilan oikeuksia.
+TypeScript-referenssikirjasto Ed25519-allekirjoitetuille suorituskuitille ja linkitetyille elinkaarihavainnoille. Kuitit sitovat toimijan ja toiminnon toimitettujen alku-, loppu- ja tuloshavaintojen tiivisteisiin.
 
-Hinnan hyväksynnän jälkeen referenssitoteutus voi havainnollistaa konseptisopimusta ja maksutilan seurantaa. Asiakkaat eivät voi vahvistaa maksuja, eikä Kopilotti vastaanota, säilytä tai siirrä varoja. Julkisessa demossa ei ole maksettavia pankkitietoja, eikä täysi invoice-to-PAID-polku ole aktiivinen julkisessa tuotantoliikenteessä; DDN-integraatiorajapinta on olemassa, mutta ei aktiivinen siellä.
+Elinkaarinäyttö yhdistää operaatiot, suoritusyritykset ja kuitit säilyttäen epävarmuuden ja ristiriitaiset tulokset. Allekirjoitusten varmennus, historian arviointi ja seuraavan toiminnon valtuutus pysyvät erillisinä vastuina.
 
-`Node.js · Express · PostgreSQL · JavaScript · Claude API · Playwright`
+**Rajaus:** allekirjoitukset varmentavat näytön määritettyjen luottamussääntöjen puitteissa; ne eivät itsenäisesti todista ulkoisia tapahtumia. Kirjasto ei suorita operaatioita, valtuuta uusintayrityksiä eikä takaa täydellistä historiaa, muuttumatonta tallennusta tai täsmälleen yhtä suoritusta.
 
-→ [Repository](https://github.com/mikko-lab/kopilotti-sales-demo) · [Live demo](https://app.kopilotti.online/en/)
+[Lähdekoodi](https://github.com/mikko-lab/execution-evidence-demo)
 
-### Ruuhkavahti — Kafka-mittakaavan suojaukset kuormassa
+## Soveltavat järjestelmät
 
-Deterministinen PASS / ESCALATE / BLOCK -kerros, joka toimii skaalautuvassa Kafka-kuluttajaryhmässä; kuormitustestattu simuloidulla live-TV-liikennepiikillä, 8 000 viestiä sekunnissa.
+### Kopilotti Sales — Myyjäliikkeen hallitsema digitaalinen myynti
 
-Kojelauta tekee näkyviksi todellisen kuluttajaviiveen, duplikaattien käsittelyn ja Kafka-kuluttajaryhmän uudelleentasapainotukset 3D-visualisoinnin, liikettä vähentävän 2D-näkymän, semanttisen HTML-taulukon ja saavutettavien reaaliaikaisten tilapäivitysten avulla.
+Tekoälyavusteista käytettyjen autojen myyntiä myyjäliikkeen määrittämissä kaupallisissa rajoissa. Kielimalli hoitaa keskustelun; deterministiset palvelinpuolen säännöt ohjaavat hinnoittelupäätöksiä ja myyntipolun tilasiirtymiä.
 
-`Python · TypeScript · Apache Kafka · Docker Compose · axe-core`
+Autokohtainen Magic Link tarjoaa asiakkaalle aloituspisteen, ja myyjäliike määrittää kaupalliset säännöt Adminissa. Erillinen Evaluation & Safety -arviointikerros testaa havaittavaa API-käyttäytymistä paikallista Sales-järjestelmää vasten eristetyssä ympäristössä.
 
-→ [Repository](https://github.com/mikko-lab/ruuhkavahti)
+**Rajaus:** järjestelmä on kehitysvaiheessa. Ulkoiset integraatiot ja pilottivalmius arvioidaan erikseen. Kopilotti ei vastaanota, säilytä tai välitä asiakkaan maksuja.
 
-### A11Y Lead Engine — automatisoitu saavutettavuusauditointiputki
+[Projektikuvaus](https://github.com/mikko-lab/kopilotti-sales-demo) · [Live-demo](https://app.kopilotti.online/en/)
 
-TypeScript-pohjainen saavutettavuusauditointiputki, joka löytää suomalaisia yrityssivustoja, ajaa WCAG-auditointeja, rikastaa tuloksia yritysrekisterin tiedoilla ja tuottaa jäsenneltyä yhteydenottomateriaalia.
+### DDN Reference — Varmennettavat deterministiset päätökset
 
-Yhdistää Playwright- ja axe-core-skannauksen jonopohjaiseen käsittelyyn ja Claude-avusteisiin yhteenvetoihin; infrastruktuuri sisältää Redis-autentikoinnin, API-välikerroksen, SSRF- ja DNS-rebinding-suojauksen, automatisoidut testit ja GitHub Actions -CI:n.
+Versioidut liiketoimintasäännöt suoritetaan WebAssemblyna kolmessa eristetyssä validaattoriprosessissa samalla koneella ja saman operaattorin hallinnassa. Päätös hyväksytään, kun vähintään kaksi konfiguroitua validaattoria tuottaa yhtenevät allekirjoitetut attestoinnit.
 
-`TypeScript · Node.js · Playwright · axe-core · Redis · BullMQ · Claude API`
+Päätöskuiteista voidaan tarkistaa allekirjoitukset, pyyntöön sidonnat, tiivisteet ja Merkle-todisteet. Toteutus demonstroi myös EVM-ankkurointia paikallisella Anvil-ketjulla.
 
-→ [Repository](https://github.com/mikko-lab/a11y-lead-engine)
+**Rajaus:** kyseessä ei ole riippumattomien validaattorien verkko eikä aktiivinen tuotantointegraatio. Kuittivarmennus ei tavallisesti suorita sääntöä uudelleen eikä osoita, onko liiketoimintasääntö itsessään oikea tai reilu.
 
-## Avoimen lähdekoodin kontribuutiot
+[Lähdekoodi](https://github.com/mikko-lab/ddn-reference)
 
-- **[567-labs/instructor](https://github.com/567-labs/instructor)** — jäljitin kutsujan omistaman viestilistan mutaatiovirheen useisiin provider-handlereihin; PR:issä #2418 ja #2419 ehdotetut korjaukset yhdistettiin maintainerin mergattuun PR:ään #2434 alkuperäisten kontribuoijien tekijyys säilyttäen
-- **[langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/issues/8314)** — tilakanavien referenssitransparenssin juurisyyanalyysi ja 12 kommentin tekninen keskustelu
-- **[Aiven-Open/karapace](https://github.com/Aiven-Open/karapace/issues/1329)** — raportoitu RecursionError itseensä viittaavan JSON Scheman yhteensopivuustarkistuksessa sekä vian jäljitys schema registryn kirjoituspolun läpi
+### Ruuhkavahti — Kafka-kontrollit kuormituksessa
+
+Deterministinen PASS / ESCALATE / BLOCK -käsittelyputki, jota on testattu paikallisesti simuloidulla 8 000 viestin sekuntipiikillä.
+
+Toteutus yhdistää kuluttajaviiveen seurannan, duplikaattien käsittelyn, erillisen kuluttajapalvelun, allekirjoitetun palveluiden välisen autentikoinnin ja hajautetun jäljityksen. Kojelauta sisältää saavutettavat semanttiset näkymät ja vähennetyn liikkeen tuen.
+
+**Rajaus:** julkaistut mittaukset kuvaavat yksilöityjä paikallisia kokeita, eivät tuotannon suorituskyky- tai saatavuustakuuta.
+
+[Lähdekoodi](https://github.com/mikko-lab/ruuhkavahti)
 
 ## Muut työt
 
-<details>
-<summary>Näytä muut projektit</summary>
+- [A11Y Lead Engine](https://github.com/mikko-lab/a11y-lead-engine) — automatisoidut saavutettavuustarkistukset, yritystietojen rikastus ja jäsennellyt yhteydenottoprosessit.
+- [Prompt Injection Gate](https://github.com/mikko-lab/prompt-injection-gate) — kokeellinen toteutus, joka erottaa rakenteellisen työkaluvasteen karanteenin parhaan yrityksen kuviotunnistuksesta.
+- [refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess) — deterministinen ALV-luokittelu ja eskalointi sekä prompt injection -regressiotestit.
+- [claude-code-invoice-guard](https://github.com/mikko-lab/claude-code-invoice-guard) — sama kontrolliperiaate toteutettuna Claude Coden ajonaikaisilla mekanismeilla.
+- [Kopilotti WebMCP](https://github.com/mikko-lab/kopilotti-webmcp) — selainagenttidemo, jossa on rajatut työkalut, näkyvä tila ja ihmisen hyväksyntäraja.
+- [osCommerce Checkout Refactor](https://github.com/mikko-lab/sap-checkout-refactor/tree/poc/checkout-modernization) — tekoälyavusteinen vanhan koodin uudistaminen, jossa liiketoimintasäännöt analysoidaan ja käyttäytyminen säilytetään testeillä.
+- [Provenanssi](https://github.com/mikko-lab/provenanssi) — avointa tutkimusta mitatun kuvatiedon erottamisesta mallin generoimasta rekonstruktiosta.
+- [Karikko](https://github.com/mikko-lab/karikko) — paikkatietoon perustuva vaarailmoituspalvelu Suomen vesille sekä erillinen [backend](https://github.com/mikko-lab/karikko-api).
 
-- **[Kopilotti WebMCP](https://github.com/mikko-lab/kopilotti-webmcp)** — avoimen lähdekoodin selainagenttihaasteen toteutus, jossa työkalut on rajattu skeemoilla, tila näkyy käyttäjälle ja hyväksyntä tehdään sivun omalla ihmisen vahvistuksella
-- **[osCommerce Checkout Refactor](https://github.com/mikko-lab/sap-checkout-refactor/tree/poc/checkout-modernization)** — tekoälyavusteinen vanhan checkout-virtauksen modernisointi; epäonnistunut testi paljasti käänteisen varastosäännön, tuloksena 34 läpäisevää testiä ja säilytetty ajonaikainen käyttäytyminen
-- **[Prompt Injection Gate](https://github.com/mikko-lab/prompt-injection-gate)** — deterministinen raja, joka eristää epäluotettavan työkaluvasteen, tuottaa PASS / ESCALATE / BLOCK -tuloksia ja tallentaa hash-ketjutetun audit-jäljen
-- **[refuse-dont-guess](https://github.com/mikko-lab/refuse-dont-guess)** — riippuvuudeton Python-suojaus ALV-luokitteluun, deterministisellä eskaloinnilla ja prompt injection -regressiotesteillä
-- **[claude-code-invoice-guard](https://github.com/mikko-lab/claude-code-invoice-guard)** — sama suojausperiaate toteutettuna Claude Coden runtime-primitiiveillä
-- **[Provenanssi](https://github.com/mikko-lab/provenanssi)** — avointa tutkimusta, joka erottaa mitatun kuvatiedon mallin generoimasta rekonstruktiosta
-- **[Karikko](https://github.com/mikko-lab/karikko)** — offline-first-periaatteella toimiva merivaarojen ilmoituspalvelu Suomen vesille, sisältäen [backendin](https://github.com/mikko-lab/karikko-api) ja [live-demon](https://demo.nordicmarinedata.com)
+## Avoimen lähdekoodin kontribuutiot
 
-</details>
+- [567-labs/instructor](https://github.com/567-labs/instructor/pull/2434) — kutsujan viestidatan mutaation jäljitys eri providereissa; ehdotetut korjaukset yhdistettiin ylläpitäjän hyväksyttyyn PR:ään alkuperäinen tekijyys säilyttäen.
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph/issues/8314) — tilakanavien referenssitransparenssin juurisyyanalyysi.
+- [Aiven-Open/karapace](https://github.com/Aiven-Open/karapace/issues/1329) — itseensä viittaavan JSON Scheman yhteensopivuustarkistuksen RecursionError-virheen raportointi ja jäljitys.
 
 ## Teknologiat
 
-TypeScript · JavaScript · Node.js · Python · Rust · Solidity · PostgreSQL · Redis · Apache Kafka · Docker · WebAssembly · Claude API · LangGraph · Playwright · Vitest · GitHub Actions
+TypeScript · JavaScript · Node.js · Python · Rust · PostgreSQL · Redis · Kafka · Docker · WebAssembly · Solidity · Playwright · Jest · Vitest · GitHub Actions
 
 ## Suunnitteluperiaate
 
-LLM-sovellukset muuttuvat luotettaviksi, kun todennäköisyyspohjainen päättely erotetaan auktoritatiivisesta päätöksenteosta. Kielimalleja käytetään siellä, missä tulkinta, synteesi ja vuorovaikutus tuovat arvoa; deterministinen ohjelmisto vastaa aina, kun kyse on oikeellisuudesta, käyttöoikeuksista, rahasta, tietoturvasta tai käyttäjän turvallisuudesta. Tämä raja suunnitellaan arkkitehtuuriin alusta asti — sitä ei lisätä jälkikäteen, kun malli saavuttaa tuotannon.
+**Flag, don’t hide.**
+
+Järjestelmän tulee kertoa, mitä se päätti, mitä se havaitsi, mitä sen näyttö voi todentaa ja missä sen rajat kulkevat. Toimintavaltuus, arviointitulos ja suoritusnäyttö eivät korvaa toisiaan.
 
 ## Yhteystiedot
 
-Avoinna ohjelmistokumppanuuksille, arkkitehtuurikonsultoinnille, valikoiduille freelance-projekteille ja etätöille.
+Avoin ohjelmistokumppanuuksille, arkkitehtuurikonsultoinnille, valikoiduille freelance-toimeksiannoille ja etärooleille.
 
-**[Ota yhteyttä →](mailto:hello@kopilotti.online?subject=Software%20partnership%20inquiry)**
+[Ota yhteyttä →](mailto:hello@kopilotti.online?subject=Software%20partnership%20inquiry)
