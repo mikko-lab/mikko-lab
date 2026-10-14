@@ -42,7 +42,7 @@ Työ erottaa ilmoitetut sääntöpäätökset havaituista vaikutuksista. Arvioin
 
 ### Execution Evidence Demo — Varmennettavat suorituskuitit ja historia
 
-TypeScript-referenssikirjasto Ed25519-allekirjoitetuille suorituskuitille ja linkitetyille elinkaarihavainnoille. Kuitit sitovat toimijan ja toiminnon toimitettujen alku-, loppu- ja tuloshavaintojen tiivisteisiin.
+TypeScript-referenssikirjasto Ed25519-allekirjoitetuille suorituskuiteille ja linkitetyille elinkaarihavainnoille. Kuitit sitovat toimijan ja toiminnon toimitettujen alku-, loppu- ja tuloshavaintojen tiivisteisiin.
 
 Elinkaarinäyttö yhdistää operaatiot, suoritusyritykset ja kuitit säilyttäen epävarmuuden ja ristiriitaiset tulokset. Allekirjoitusten varmennus, historian arviointi ja seuraavan toiminnon valtuutus pysyvät erillisinä vastuina.
 
